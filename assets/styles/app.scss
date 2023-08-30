@@ -1,0 +1,42 @@
+@import "~bootstrap/scss/bootstrap";
+@import "variables.scss";
+
+.admin_body_container {
+    padding: 0 5%;
+}
+.entete{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+}
+
+.pied-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    list-style: none;
+    background-color: $secondary;
+}
+
+body {
+    background-color: $primary;
+    
+    & header{
+        background-color: $secondary;
+        
+        & h1 {
+            color: $third;
+        }
+    }
+
+    & footer{
+        background-color: $secondary;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: $third;
+
+    }
+}
+

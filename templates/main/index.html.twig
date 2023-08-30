@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BiblioLivre{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block body %}
+
+{% for livre in livres %}
+    <div class="un-livre">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ asset('images/LOTR1.jpg') }}" class="card-img-top" alt="Le seigneur des anneaux">
+            <div class="card-body">
+                <h5 class="card-title">La communauté de l'anneau</h5>
+                <p class="card-text">Le seigneur des anneaux - 1</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Auteur : J. R. R. Tolkien</li>
+                <li class="list-group-item">Edition : Pocket</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Ajouter livre</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+</div>
+{% endblock %}

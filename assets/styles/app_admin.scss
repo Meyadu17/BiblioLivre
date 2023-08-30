@@ -1,0 +1,53 @@
+@import "~bootstrap/scss/bootstrap";
+@import "variables.scss";
+
+.admin_body_container {
+    padding: 0 5%;
+}
+.entete{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+}
+
+.pied-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    list-style: none;
+    background-color: $secondary;
+}
+
+.un-livre{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+body {
+    background-color: $primary;
+    
+    & header{
+        background-color: $secondary;
+        
+        & h1 {
+            color: $third;
+        }
+    }
+
+    & main {
+        min-height: calc(100vh); /* Hauteur minimale du contenu pour garder le footer en bas */
+        
+      }
+    
+    & footer{
+        background-color: $secondary;
+        bottom: 0;
+        width: 100%;
+        color: $third;
+
+    }
+}
+

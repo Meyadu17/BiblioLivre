@@ -6,11 +6,11 @@
         <link rel="icon" href="images/book.png">
         
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('app_admin') }}
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('app_admin') }}
         {% endblock %}
     </head>
 
@@ -35,6 +35,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Mes livre</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ajouter livre</a>
+                    </li>
                 </ul>
                 <span class="navbar-text">
                     déconnection
@@ -44,9 +47,11 @@
             </nav>
         </header>
 
+        <main>
 
         {% block body %}{% endblock %}
-
+        
+        </main>
         <footer class="footer">
 
             <div>
