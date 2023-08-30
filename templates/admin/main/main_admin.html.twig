@@ -4,26 +4,34 @@
 
 {% block body %}
 
-{% for livre in livres %}
-    <div class="un-livre">
-        <div class="card" style="width: 18rem;">
-            <img src="{{ asset('images/LOTR1.jpg') }}" class="card-img-top" alt="Le seigneur des anneaux">
-            <div class="card-body">
-                <h5 class="card-title">{{livre.titre}}</h5>
-                <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Auteur : {{livre.auteur}}</li>
-                <li class="list-group-item">Edition : {{livre.langue}}</li>
-            </ul>
-            <div class="card-body">
-                <a class="btn btn-primary" href="#" class="card-link">Ajouter livre</a>
-                <a class="btn btn-primary" href="#" class="card-link">Modifier livre</a>
+<div class="un-livre">
+    {% for livre in livres %}
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ asset('images/LOTR1.jpg') }}" class="img-fluid rounded-start" alt="Le seigneur des anneaux">
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{livre.titre}}</h5>
+                        <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
+                        <p class="card-text"><small class="text-body-secondary">Auteur : {{livre.auteur}} | {{livre.editeur}}</small></p>
+                        </div>
+                        <div class="card-body">
+                            <a class="btn btn-primary" href="https://symfony.com/doc/current/index.html" class="card-link">Ajouter à la collection</a>
+                        </div>
+                        <div class="card-body">
+                            <a class="btn btn-primary" href="https://symfony.com/doc/current/index.html" class="card-link">Détail du livre</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-{% endfor %}
 
+
+
+    {% endfor %}
+ </div>
 
 
 </div>
