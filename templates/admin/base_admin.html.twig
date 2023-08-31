@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}BiblioLivre{% endblock %}</title>
+        <title>{% block title %} BiblioLivre{% endblock %}</title>
+
         <link rel="icon" href="images/book.png">
         
         {% block stylesheets %}
@@ -38,6 +39,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_admin_main_ajouter') }}">Nouveau livre</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_admin_auteur_ajouter') }}">Nouveau Auteur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_admin_main_ajouter') }}">Nouveau Genre</a>
+                    </li>
                 </ul>
                 <span class="navbar-text">
                     déconnection
@@ -60,10 +67,9 @@
                     <li><a href="https://symfony.com/doc/current/index.html">Mentions légales</a></li>
                     <li><a href="https://symfony.com/doc/current/index.html">Contact</a></li>
                 </ul>
-                <!--foote_bottom_ul_amrc ends here-->
+
                 <p class="text-center">Copyright @2023 | Create by Meya</a></p>
 
-            <!--social_footer_ul ends here-->
             </div>
 
         </footer>

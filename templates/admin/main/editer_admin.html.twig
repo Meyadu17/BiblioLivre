@@ -1,61 +1,54 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Editer livre{% endblock %}
+{% block title %}BiblioLivre{% endblock %}
 
 {% block body %}
-<section class="admin_body_container">
 
-    <div class="container">
-        
-        <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_bien_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
+    <section class="admin_body_container">
+        <div class="contenaire">
+            <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_livre_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
+            
+            {{ form_start(form) }}
+                <div class="clo-4">
+                    {{ form_row(form.cycle) }}
+                </div>
 
-        {{ form_start(form) }}
-        <div class="class="row g-3 needs-validation" novalidate">
+                <div class="clo-4">
+                    {{ form_row(form.tome) }}
+                </div>
 
-            <div class="clo-4">
-                {{ form_row(form.cycle) }}
-            </div>
+                <div class="clo-4">
+                    {{ form_row(form.titre) }}
+                </div>
 
-            <div class="clo-4">
-                {{ form_row(form.tome) }}
-            </div>
+               
 
-            <div class="clo-4">
-                {{ form_row(form.titre) }}
-            </div>
+                <div class="clo-4">
+                    {{ form_row(form.langue) }}
+                </div>
 
-            <div class="clo-4">
-                {{ form_row(form.auteur) }}
-            </div>   
+                
 
-            <div class="clo-4">
-                {{ form_row(form.langue) }}
-            </div>
+                <div class="clo-4">
+                    {{ form_row(form.editeur) }}
+                </div>
 
-            <div class="clo-4">
-                {{ form_row(form.genre) }}
-            </div>
+                <div class="clo-4">
+                    {{ form_row(form.isbn) }}
+                </div>
 
-            <div class="clo-4">
-                {{ form_row(form.editeur) }}
-            </div>
+                <div class="clo-4">
+                    {{ form_row(form.resume) }}
+                </div>
 
-            <div class="clo-4">
-                {{ form_row(form.isbn) }}
-            </div>
+                {% if app.request.get('_route') == "app_admin_main_ajouter" %}
+                    <button class="btn btn-success" type="submit">Enregistrer</button>
+                {% else %}
+                    <button class="btn btn-success" type="submit">Modifier</button>
+                {% endif %}
+            
+            {{ form_end(form) }}
 
-            <div class="clo-4">
-                {{ form_row(form.resume) }}
-            </div>
-
-            {% if app.request.get('_route') == "app_admin_main_ajouter" %}
-                <button class="btn btn-success" type="submit">Enregistrer</button>
-            {% else %}
-                <button class="btn btn-success" type="submit">Modifier</button>
-            {% endif %}
         </div>
-        {{ form_end(form) }}
-    </div>
-    
-</section>
+    </section>
 {% endblock %}

@@ -4,33 +4,23 @@
 .admin_body_container {
     padding: 0 5%;
 }
-.entete{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-}
 
-.pied-page{
+.entete{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .pied-page{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 50px;
     list-style: none;
     background-color: $secondary;
-}
-
-.un-livre{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 5%;
-    gap: 50px;
-
-}
+  }
 
 body {
-    background-color: $primary;
     
     & header{
         background-color: $secondary;
@@ -41,8 +31,9 @@ body {
     }
 
     & main {
+        padding-top: 30px;
         min-height: calc(100vh); /* Hauteur minimale du contenu pour garder le footer en bas */
-        
+        background-color: $third;
       }
     
     & footer{

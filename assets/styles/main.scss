@@ -1,9 +1,21 @@
+@import "~bootstrap/scss/bootstrap";
+@import "variables.scss";
+
 .example-wrapper { 
     margin: 1em auto;  width: 95%; font: 18px/1.5 sans-serif;
 }
+
 .example-wrapper code {
     padding: 2px 6px;
 }
+
 th, td {
   border-bottom: 1px solid #ddd;
+}
+
+.un-livre{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
 }

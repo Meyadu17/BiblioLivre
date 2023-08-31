@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LivreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,13 +26,7 @@ class Livre
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $auteur = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $langue = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $genre = null;
 
     #[ORM\Column(length: 255)]
     private ?string $editeur = null;
@@ -40,6 +36,18 @@ class Livre
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $resume = null;
+
+    #[ORM\ManyToMany(targetEntity: Auteur::class, mappedBy: 'livre')]
+    private Collection $auteurs;
+
+    #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'livre')]
+    private Collection $genres;
+
+    public function __construct()
+    {
+        $this->auteurs = new ArrayCollection();
+        $this->genres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,18 +90,6 @@ class Livre
         return $this;
     }
 
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(string $auteur): static
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
     public function getLangue(): ?string
     {
         return $this->langue;
@@ -102,18 +98,6 @@ class Livre
     public function setLangue(string $langue): static
     {
         $this->langue = $langue;
-
-        return $this;
-    }
-
-    public function getGenre(): ?string
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(string $genre): static
-    {
-        $this->genre = $genre;
 
         return $this;
     }
@@ -150,6 +134,60 @@ class Livre
     public function setResume(string $resume): static
     {
         $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Auteur>
+     */
+    public function getAuteurs(): Collection
+    {
+        return $this->auteurs;
+    }
+
+    public function addAuteur(Auteur $auteur): static
+    {
+        if (!$this->auteurs->contains($auteur)) {
+            $this->auteurs->add($auteur);
+            $auteur->addLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuteur(Auteur $auteur): static
+    {
+        if ($this->auteurs->removeElement($auteur)) {
+            $auteur->removeLivre($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Genre>
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Genre $genre): static
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+            $genre->addLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): static
+    {
+        if ($this->genres->removeElement($genre)) {
+            $genre->removeLivre($this);
+        }
 
         return $this;
     }
