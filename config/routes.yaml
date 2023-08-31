@@ -6,4 +6,4 @@ controllers:
 
 home:
     path: /
-    controller: App\Controller\MainController::index
+    controller: App\Controller\MainController::lister

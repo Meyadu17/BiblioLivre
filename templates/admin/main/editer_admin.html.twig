@@ -1,54 +1,83 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}BiblioLivre{% endblock %}
+{% block title %}BiblioLivre - Livre{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
 
 {% block body %}
 
     <section class="admin_body_container">
         <div class="contenaire">
-            <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_livre_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
-            
+            <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_main_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
+
             {{ form_start(form) }}
-                <div class="clo-4">
-                    {{ form_row(form.cycle) }}
+
+            <form class="row g-3">
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Cycle/Série :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.cycle) }}
+                    </div>
                 </div>
 
-                <div class="clo-4">
-                    {{ form_row(form.tome) }}
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Tome :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.tome) }}
+                    </div>
                 </div>
 
-                <div class="clo-4">
-                    {{ form_row(form.titre) }}
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Titre :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.titre) }}
+                    </div>
                 </div>
 
-               
-
-                <div class="clo-4">
-                    {{ form_row(form.langue) }}
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Langue :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.langue) }}
+                    </div>
                 </div>
 
-                
-
-                <div class="clo-4">
-                    {{ form_row(form.editeur) }}
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Éditeur :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.editeur) }}
+                    </div>
                 </div>
 
-                <div class="clo-4">
-                    {{ form_row(form.isbn) }}
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">ISBN :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.isbn) }}
+                    </div>
                 </div>
 
-                <div class="clo-4">
-                    {{ form_row(form.resume) }}
+
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Résumé :</label>
+                    <div class="col-sm-10">
+                        {{ form(form.resume) }}
+                    </div>
                 </div>
 
-                {% if app.request.get('_route') == "app_admin_main_ajouter" %}
-                    <button class="btn btn-success" type="submit">Enregistrer</button>
-                {% else %}
-                    <button class="btn btn-success" type="submit">Modifier</button>
-                {% endif %}
-            
+                <div class="col-12">
+                    {% if app.request.get('_route') == "app_admin_main_ajouter" %}
+                        <button class="btn btn-success" type="submit">Enregistrer</button>
+                    {% else %}
+                        <button class="btn btn-success" type="submit">Modifier</button>
+                    {% endif %}
+                </div>
+            </form>
+
             {{ form_end(form) }}
 
         </div>
     </section>
+
 {% endblock %}

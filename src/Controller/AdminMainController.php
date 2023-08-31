@@ -65,5 +65,4 @@ class AdminMainController extends AbstractController
             'form' => $form,
         ]);
     }
-    
 }

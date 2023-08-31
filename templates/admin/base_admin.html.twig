@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %} BiblioLivre{% endblock %}</title>
+        <link rel="icon" href="images/book.png">
 
         <link rel="icon" href="images/book.png">
-        
+
         {% block stylesheets %}
             {{ encore_entry_link_tags('app_admin') }}
         {% endblock %}
@@ -37,13 +38,13 @@
                         <a class="nav-link" href="https://symfony.com/doc/current/index.html">Mes livres</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_main_ajouter') }}">Nouveau livre</a>
+                        <a class="nav-link" href="{{ path('app_admin_main_liste') }}">Livres</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_auteur_ajouter') }}">Nouveau Auteur</a>
+                        <a class="nav-link" href="{{ path('app_admin_auteur_liste') }}">Auteurs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_main_ajouter') }}">Nouveau Genre</a>
+                        <a class="nav-link" href="{{ path('app_admin_genre_liste') }}">Genres</a>
                     </li>
                 </ul>
                 <span class="navbar-text">

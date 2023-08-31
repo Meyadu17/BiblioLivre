@@ -33,7 +33,7 @@ body {
     & main {
         padding-top: 30px;
         min-height: calc(100vh); /* Hauteur minimale du contenu pour garder le footer en bas */
-        background-color: $third;
+
       }
     
     & footer{
@@ -41,7 +41,6 @@ body {
         bottom: 0;
         width: 100%;
         color: $third;
-
     }
 }
 

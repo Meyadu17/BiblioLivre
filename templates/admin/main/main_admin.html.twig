@@ -1,6 +1,6 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}BiblioLivre{% endblock %}
+{% block title %}BiblioLivre - Livre{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -8,33 +8,35 @@
 {% endblock %}
 
 {% block body %}
+    <section class="admin_body_container">
+        <a class="btn btn-info" href="{{ path('app_admin_main_ajouter') }}">Nouveau Livre</a>
+    </section>
+    <br>
 
-<div class="un-livre">
-    {% for livre in livres %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('images/LOTR1.jpg') }}" class="img-fluid rounded-start" alt="Le seigneur des anneaux">
-                </div>
+    <div class="un-livre">
+        {% for livre in livres %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ asset('images/LOTR1.jpg') }}" class="img-fluid rounded-start" alt="Le seigneur des anneaux">
+                    </div>
 
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{livre.titre}}</h5>
-                        <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
-                        <p class="card-text"><small class="text-body-secondary">Auteur : J. R. R. Tolkien | {{livre.editeur}}</small></p>
-                        </div>
+                    <div class="col-md-8">
                         <div class="card-body">
-                            <a class="btn btn-primary" href="https://symfony.com/doc/current/index.html" class="card-link">Ajouter à la collection</a>
+                            <h5 class="card-title">{{livre.titre}}</h5>
+                            <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
+                            <p class="card-text"><small class="text-body-secondary">Auteur : J. R. R. Tolkien | {{livre.editeur}}</small></p>
+                            </div>
+                            <div class="card-body">
+                                <a class="btn btn-primary" href="https://symfony.com/doc/current/index.html" class="card-link">Ajouter à la collection</a>
+                            </div>
+                            <div class="card-body">
+                                <a class="btn btn-primary" href="https://symfony.com/doc/current/index.html" class="card-link">Détail du livre</a>
                         </div>
-                        <div class="card-body">
-                            <a class="btn btn-primary" href="https://symfony.com/doc/current/index.html" class="card-link">Détail du livre</a>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
- </div>
+        {% endfor %}
+    </div>
 
-
-</div>
 {% endblock %}

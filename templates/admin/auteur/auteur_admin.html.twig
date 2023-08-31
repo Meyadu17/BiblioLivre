@@ -1,12 +1,13 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}BiblioLivre{% endblock %}
+{% block title %}BiblioLivre - Auteur {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
 
 {% block body %}
-    <section class="admin_body_container">
-        <a class="btn btn-info" href="{{ path('app_admin_auteur_ajouter') }}">Nouveau Auteur</a>
-    </section>
-    <br>
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success" role="alert">
@@ -14,25 +15,55 @@
         </div>
     {% endfor %}
 
+    <section class="admin_body_container">
+        <div class="contenaire">
+            <h1 class="mb-3">Les auteurs</h1>
+
+            {{ form_start(form) }}
+
+            <form class="row g-3">
+
+                <div class="row g-3">
+                    <div class="col-sm">
+                        <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom">
+                    </div>
+
+                    <div class="col-sm">
+                        <input type="text" class="form-control" placeholder="Nom" aria-label="Nom">
+                    </div>
+
+                     <div class="col-sm">
+                        <button class="btn btn-success" type="submit">Ajouter</button>
+                    </div>
+                </div>
+
+            </form>
+
+            {{ form_end(form) }}
+        </div>
+    </section>
+
+    <section class="admin_body_container">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody >
         {% for auteur in auteurs %}
             <tr>
-                <th>{{bien.nom}}</th>
-                <td>{{bien.prenom}}</td>
+                <td>{{auteur.prenom}}</td>
+                <td>{{auteur.nom}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_admin_bien_modifier', {'id' : bien.id}) }}">Modifier</a>
-                    <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_bien_supprimer', {'id' : bien.id}) }}">Supprimer</a>
+                    <a class="btn btn-primary" href="{{ path('app_admin_auteur_modifier', {'id' : auteur.id}) }}">Modifier</a>
+                    <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_auteur_supprimer', {'id' : auteur.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    </section>
 {% endblock %}
