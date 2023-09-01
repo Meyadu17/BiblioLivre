@@ -13,7 +13,6 @@
         <a class="btn btn-info" href="{{ path('app_admin_main_ajouter') }}" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus" style="color: #3D3D3D;"></i> Nouveau Livre</a>
     </section>
     <br>
-
     <div class="un-livre">
         {% for livre in livres %}
             <div class="card mb-3" style="max-width: 540px;">
@@ -33,7 +32,7 @@
                             <a class="btn btn-outline-light" href="https://symfony.com/doc/current/index.html" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus"></i> Ajouter à la collection</a>
                         </div>
                         <div class="card-body">
-                            <a class="btn btn-outline-light" href="https://symfony.com/doc/current/index.html" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-magnifying-glass"></i> Détail du livre</a>
+                            <a class="btn btn-outline-light" href="{{ path('app_admin_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-magnifying-glass"></i> Détail du livre</a>
                         </div>
                     </div>
                 </div>

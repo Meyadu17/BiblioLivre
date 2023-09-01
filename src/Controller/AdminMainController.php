@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/main', name: 'app_admin_main')]
+#[Route('/admin/livre', name: 'app_admin_main')]
 class AdminMainController extends AbstractController
 {
     #[Route('/', name: '_liste')]
@@ -49,12 +49,6 @@ class AdminMainController extends AbstractController
         //si le formulaire est soumis et est valide
         if($form->isSubmitted() && $form->isValid()) { 
 
-            // Gestion des genres
-            /*$genres = $form->get('genres')->getData();
-            foreach ($genres as $genre) {
-                $livre->addGenre($genre);
-            }*/
-            
             //traitement des données
             $entityManager->persist($livre); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
@@ -70,6 +64,14 @@ class AdminMainController extends AbstractController
 
         return  $this->render('admin/main/editer_admin.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: '_voir', requirements: ['id' => '\d+'])]
+    public function voir(Livre $livre):Response {
+
+        return  $this->render('admin/main/voir_livre_admin.html.twig', [
+            'livre' => $livre,
         ]);
     }
 }

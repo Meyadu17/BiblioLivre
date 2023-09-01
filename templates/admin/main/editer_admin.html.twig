@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block body %}
-
     <section class="admin_body_container">
     
         <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_main_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
@@ -33,8 +32,8 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label for="inputauter" class="form-label">Auteur : </label>
-                            <input class="form-control" type="text" placeholder="Ne pas remplir" aria-label="Disabled input example" disabled>
+                            <label for="inputgenre" class="form-label">Auteur(s) : </label>
+                            {{ form(form.auteurs) }}
                         </div>
 
                         <div class="col-md-12">
@@ -47,13 +46,10 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label for="inputgenre" class="form-label">Grenre : </label>
-                            <input class="form-control" type="text" placeholder="Ne pas remplir" aria-label="Disabled input example" disabled>
-                        <!--
-                            <label for="{ { form.genres.vars.id }}">Genres</label>
-                            { { form_widget(form.genres, {'attr': {'class': 'form-control'}}) }}
-                        -->
+                            <label for="inputgenre" class="form-label">Grenre(s) : </label>
+                            {{ form(form.genres) }}
                         </div>
+
                         <div class="col-md-12">
                             <label for="inputisbn" class="form-label">ISBN : </label>
                             {{ form(form.isbn) }}
@@ -75,7 +71,6 @@
 
                 {{ form_end(form) }}
             </div>
-            
         </div>
     </section>
 

@@ -81,4 +81,7 @@ class Auteur
 
         return $this;
     }
+    public function getPrenomNom(){
+        return $this->prenom.' '.$this->nom;
+    }
 }

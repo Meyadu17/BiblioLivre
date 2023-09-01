@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
 {% block title %}BiblioLivre - Livre{% endblock %}
 
@@ -8,32 +8,27 @@
 {% endblock %}
 
 {% block body %}
+    <section class="admin_body_container">
+        <div class="un-livre">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ asset('images/LOTR1.jpg') }}" class="img-fluid rounded-start" alt="Le seigneur des anneaux">
+                    </div>
 
-<section class="admin_body_container">
-    <div class="un-livre">
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('images/LOTR1.jpg') }}" class="img-fluid rounded-start" alt="Le seigneur des anneaux">
-                </div>
-
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{livre.titre}}</h5>
-                        <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
-                        <p class="card-text"><small class="text-body-secondary"><b>Auteur :</b> J. R. R. Tolkien <b>| Edition :</b> {{livre.editeur}}</small></p>
-                        <p class="card-text"><small class="text-body-secondary"><b>Genre :</b> Fantastique</small></p>
-                        <p class="card-text"><small class="text-body-secondary"><b>Langue :</b> {{livre.langue}}</small></p>
-                        <p class="card-text"><small class="text-body-secondary"><b>ISBN :</b> {{livre.isbn}}</small></p>
-                        <p class="card-text"><small class="text-body-secondary"><b>Résumé :</b><br> {{livre.resume}}</small></p>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{livre.titre}}</h5>
+                            <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
+                            <p class="card-text"><small class="text-body-secondary"><b>Auteur :</b> J. R. R. Tolkien <b>| Edition :</b> {{livre.editeur}}</small></p>
+                            <p class="card-text"><small class="text-body-secondary"><b>Genre :</b> Fantastique</small></p>
+                            <p class="card-text"><small class="text-body-secondary"><b>Langue :</b> {{livre.langue}}</small></p>
+                            <p class="card-text"><small class="text-body-secondary"><b>ISBN :</b> {{livre.isbn}}</small></p>
+                            <p class="card-text"><small class="text-body-secondary"><b>Résumé :</b><br> {{livre.resume}}</small></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
-
-    
-</section>
+    </section>
 {% endblock %}

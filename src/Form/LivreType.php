@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Auteur;
+use App\Entity\Genre;
 use App\Entity\Livre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,12 +18,20 @@ class LivreType extends AbstractType
             ->add('cycle')
             ->add('tome')
             ->add('titre')
-            /*->add('genres', EntityType::class, [
+            ->add('genres', EntityType::class, [
                 'class' => Genre::class,
                 'choice_label' => 'libelle',
                 'multiple' => true,
                 'expanded' => true,
-            ])*/
+                'by_reference' => false,
+            ])
+            ->add('auteurs', EntityType::class, [
+                'class' => Auteur::class,
+                'choice_label' => 'prenomNom',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
+            ])
             ->add('langue')
             ->add('editeur')
             ->add('isbn')
