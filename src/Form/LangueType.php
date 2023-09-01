@@ -2,23 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Genre;
+use App\Entity\Langue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GenreType extends AbstractType
+class LangueType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle');
+            ->add('code')
+            ->add('libelle')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Genre::class,
+            'data_class' => Langue::class,
         ]);
     }
 }

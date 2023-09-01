@@ -1,6 +1,6 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}BiblioLivre - Genre{% endblock %}
+{% block title %}BiblioLivre - Langue {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
 {% block body %}
     <section class="admin_body_container">
         <div class="contenaire">
-            <h1 class="mb-3">Les genres</h1>
+            <h1 class="mb-3">Les langues</h1>
             <div class="un-livre">
                 <div class="card mb-3" style="width: 50% ; padding: 8px;">
                     {{ form_start(form) }}
@@ -18,18 +18,17 @@
                     <form class="row g-3">
                         <div class="row g-3">
                             <div class="col-sm">
+                                {{ form_row(form.code) }}
+                            </div>
+
+                            <div class="col-sm">
                                 {{ form_row(form.libelle) }}
                             </div>
 
                             <div class="col-sm">
                                 <br>
-                                {% if app.request.get('_route') == "app_admin_genre_ajouter" %}
-                                    <br>
-                                    <button class="btn btn-success" type="submit">Enregistrer</button>
-                                {% else %}
-                                    <br>
-                                    <button class="btn btn-success" type="submit">Modifier</button>
-                                {% endif %}                            </div>
+                                <button class="btn btn-success" type="submit">Modifier</button>
+                            </div>
                         </div>
                     </form>
 

@@ -10,36 +10,39 @@
 {% block body %}
     <section class="admin_body_container">
         <div class="contenaire">
-            <h1 class="mb-3">{{ app.request.get('_route') == "app_admin_auteur_ajouter" ? 'Ajouter' : 'Modifier' }} un auteur</h1>
+            <h1 class="mb-3">Les auteurs</h1>
 
-            {{ form_start(form) }}
+            <div class="un-livre">
+                <div class="card mb-3" style="width: 50% ; padding: 8px;">
+                    {{ form_start(form) }}
 
-            <form class="row g-3">
-                <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Prénom :</label>
-                    <div class="col-sm-10">
-                        {{ form(form.prenom) }}
-                    </div>
+                    <form class="row g-3">
+                        <div class="row g-3">
+                            <div class="col-sm">
+                                {{ form_row(form.nom) }}
+                            </div>
+
+                            <div class="col-sm">
+                                {{ form_row(form.prenom) }}
+                            </div>
+
+                            <div class="col-sm">
+                                <div class="col-12">
+                                    {% if app.request.get('_route') == "app_admin_genre_ajouter" %}
+                                        <br>
+                                        <button class="btn btn-success" type="submit">Enregistrer</button>
+                                    {% else %}
+                                        <br>
+                                        <button class="btn btn-success" type="submit">Modifier</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    {{ form_end(form) }}
                 </div>
-
-                <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Nom :</label>
-                    <div class="col-sm-10">
-                        {{ form(form.nom) }}
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    {% if app.request.get('_route') == "app_admin_genre_ajouter" %}
-                        <button class="btn btn-success" type="submit">Enregistrer</button>
-                    {% else %}
-                        <button class="btn btn-success" type="submit">Modifier</button>
-                    {% endif %}
-                </div>
-            </form>
-
-            {{ form_end(form) }}
-
+            </div>
         </div>
     </section>
 

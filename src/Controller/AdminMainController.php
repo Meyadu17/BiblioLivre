@@ -33,6 +33,7 @@ class AdminMainController extends AbstractController
                            LivreRepository $livreRepository, 
                            int $id = null):Response
     {
+
         if($id == null){
             //Si id null, c'est que l'on créer le bien
             $livre = new Livre();
@@ -47,7 +48,7 @@ class AdminMainController extends AbstractController
         $form->handleRequest($request);
 
         //si le formulaire est soumis et est valide
-        if($form->isSubmitted() && $form->isValid()) { 
+        if($form->isSubmitted() /*&& $form->isValid()*/) {
 
             //traitement des données
             $entityManager->persist($livre); //sauvegarde le bien

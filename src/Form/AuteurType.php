@@ -13,8 +13,7 @@ class AuteurType extends AbstractType
     {
         $builder
             ->add('prenom')
-            ->add('nom')
-        ;
+            ->add('nom');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

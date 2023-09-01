@@ -26,9 +26,6 @@ class Livre
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $langue = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $editeur = null;
 
     #[ORM\Column(nullable: true)]
@@ -42,6 +39,9 @@ class Livre
 
     #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'livre')]
     private Collection $genres;
+
+    #[ORM\ManyToOne(inversedBy: 'livre')]
+    private ?Langue $langue = null;
 
     public function __construct()
     {
@@ -86,18 +86,6 @@ class Livre
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getLangue(): ?string
-    {
-        return $this->langue;
-    }
-
-    public function setLangue(string $langue): static
-    {
-        $this->langue = $langue;
 
         return $this;
     }
@@ -188,6 +176,18 @@ class Livre
         if ($this->genres->removeElement($genre)) {
             $genre->removeLivre($this);
         }
+
+        return $this;
+    }
+
+    public function getLangue(): ?Langue
+    {
+        return $this->langue;
+    }
+
+    public function setLangue(?Langue $langue): static
+    {
+        $this->langue = $langue;
 
         return $this;
     }

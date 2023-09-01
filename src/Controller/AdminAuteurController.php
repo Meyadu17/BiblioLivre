@@ -16,7 +16,7 @@ class AdminAuteurController extends AbstractController {
     #[Route('/', name: '_liste')]
     public function lister(Request $request,
                            EntityManagerInterface $entityManager,
-                           AuteurRepository $auteurRepository,
+                           AuteurRepository $auteurRepository
                            ):Response {
 
     $auteur = new Auteur();

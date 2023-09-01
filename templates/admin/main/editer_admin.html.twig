@@ -9,67 +9,59 @@
 
 {% block body %}
     <section class="admin_body_container">
-    
-        <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_main_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
+        <div class="contenaire">
+            <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_main_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
 
-        <div class="un-livre">
-            <div class="card mb-3" style="width: 75% ; padding: 8px;">
-                {{ form_start(form) }}
+            <div class="un-livre">
+                <div class="card mb-3" style="width: 50% ; padding: 8px;">
+                    {{ form_start(form) }}
 
                     <form class="row g-3">
-                        <div class="col-md-12">
-                            <label for="inputcycle" class="form-label">Cycle/Série : </label>
-                            {{ form(form.cycle) }}
-                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                {{ form_row(form.cycle) }}
+                            </div>
 
-                        <div class="col-md-12">
-                            <label for="inputtome" class="form-label">Tome/N° : </label>
-                            {{ form(form.tome) }}
-                        </div>
-                        <div class="col-md-12">
-                            <label for="inputtitre" class="form-label">Titre : </label>
-                            {{ form(form.titre) }}
-                        </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.tome) }}
+                            </div>
 
-                        <div class="col-md-12">
-                            <label for="inputgenre" class="form-label">Auteur(s) : </label>
-                            {{ form(form.auteurs) }}
-                        </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.titre) }}
+                            </div>
 
-                        <div class="col-md-12">
-                            <label for="inputlangue" class="form-label">Langue : </label>
-                            {{ form(form.langue) }}
-                        </div>
-                        <div class="col-md-12">
-                            <label for="inputediteur" class="form-label">Editeur : </label>
-                            {{ form(form.editeur) }}
-                        </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.auteurs) }}
+                            </div>
 
-                        <div class="col-md-12">
-                            <label for="inputgenre" class="form-label">Grenre(s) : </label>
-                            {{ form(form.genres) }}
-                        </div>
+                            <div class="col-md-12">
+                                {{ form_widget(form.langue) }}
+                            </div>
 
-                        <div class="col-md-12">
-                            <label for="inputisbn" class="form-label">ISBN : </label>
-                            {{ form(form.isbn) }}
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <label for="inputresume" class="form-label">Résumé :</label>
-                            {{ form(form.resume) }}
-                        </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.editeur) }}
+                            </div>
 
-                        <div class="col-md-12">
-                            {% if app.request.get('_route') == "app_admin_main_ajouter" %}
+                            <div class="col-md-12">
+                                {{ form_row(form.genres) }}
+                            </div>
+
+                            <div class="col-md-12">
+                                {{ form_row(form.isbn) }}
+                            </div>
+
+                            <div class="col-md-12">
+                                {{ form_row(form.resume) }}
+                            </div>
+
+                            <div class="col-sm">
                                 <button class="btn btn-success" type="submit">Enregistrer</button>
-                            {% else %}
-                                <button class="btn btn-success" type="submit">Modifier</button>
-                            {% endif %}
+                            </div>
                         </div>
                     </form>
 
-                {{ form_end(form) }}
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </section>

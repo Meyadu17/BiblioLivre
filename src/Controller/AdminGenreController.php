@@ -16,8 +16,8 @@ class AdminGenreController extends AbstractController {
     #[Route('/', name: '_liste')]
     public function lister(Request $request,
                            EntityManagerInterface $entityManager,
-                           GenreRepository $genreRepository,
-                           int $id = null):Response {
+                           GenreRepository $genreRepository
+                           ):Response {
         $genre = new Genre();
 
         $form = $this->createForm(GenreType::class, $genre);
