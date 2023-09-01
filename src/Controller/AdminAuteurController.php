@@ -17,7 +17,7 @@ class AdminAuteurController extends AbstractController {
     public function lister(Request $request,
                            EntityManagerInterface $entityManager,
                            AuteurRepository $auteurRepository,
-                           int $id = null):Response {
+                           ):Response {
 
     $auteur = new Auteur();
 

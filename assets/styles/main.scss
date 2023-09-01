@@ -10,16 +10,23 @@
 }
 
 th, td {
-  border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
 }
 
-.un-livre{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
+.un-livre {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
 }
-.card{
-  border-radius: 10px 10px;
-  border: solid $third;
-  }
+
+.card {
+    border-radius: 10px 10px;
+    border: solid $third;
+}
+
+.contenaire {
+    align-items: center;
+
+}

@@ -48,6 +48,13 @@ class AdminMainController extends AbstractController
 
         //si le formulaire est soumis et est valide
         if($form->isSubmitted() && $form->isValid()) { 
+
+            // Gestion des genres
+            /*$genres = $form->get('genres')->getData();
+            foreach ($genres as $genre) {
+                $livre->addGenre($genre);
+            }*/
+            
             //traitement des données
             $entityManager->persist($livre); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
