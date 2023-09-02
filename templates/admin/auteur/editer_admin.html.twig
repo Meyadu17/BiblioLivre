@@ -9,41 +9,31 @@
 
 {% block body %}
     <section class="admin_body_container">
-        <div class="contenaire">
-            <h1 class="mb-3">Les auteurs</h1>
-
-            <div class="un-livre">
-                <div class="card mb-3" style="width: 50% ; padding: 8px;">
+        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+            <div class="row g-0">
+                <h2 class="mb-4">Modifier auteur</h2>
+                <div class="card-body">
                     {{ form_start(form) }}
+                    <form class="form-floating">
+                        <div class="form-floating mb-3">
+                            {{ form_widget(form.nom, {'attr':{'class':'form-control'}}) }}
+                            {{ form_label(form.nom, 'Nom* :', {'attr':{'for':'floatingInput'}}) }}
+                            {{ form_errors(form.nom) }}
+                        </div>
 
-                    <form class="row g-3">
-                        <div class="row g-3">
-                            <div class="col-sm">
-                                {{ form_row(form.nom) }}
-                            </div>
+                        <div class="form-floating mb-3">
+                            {{ form_widget(form.prenom, {'attr':{'class':'form-control'}}) }}
+                            {{ form_label(form.prenom, 'Prénom :', {'attr':{'for':'floatingInput'}}) }}
+                            {{ form_errors(form.prenom) }}
+                        </div>
 
-                            <div class="col-sm">
-                                {{ form_row(form.prenom) }}
-                            </div>
-
-                            <div class="col-sm">
-                                <div class="col-12">
-                                    {% if app.request.get('_route') == "app_admin_genre_ajouter" %}
-                                        <br>
-                                        <button class="btn btn-success" type="submit">Enregistrer</button>
-                                    {% else %}
-                                        <br>
-                                        <button class="btn btn-success" type="submit">Modifier</button>
-                                    {% endif %}
-                                </div>
-                            </div>
+                        <div class="col-sm" style="text-align: center">
+                            <button class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Modifier</button>
                         </div>
                     </form>
-
                     {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </section>
-
 {% endblock %}

@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/main', name: 'app_main')]
+#[Route('/livre', name: 'app_main')]
 class MainController extends AbstractController{
 
     #[Route('/', name: '_liste')]
@@ -43,6 +43,14 @@ class MainController extends AbstractController{
     {
         return $this->render('main/en_travaux.html.twig', [
             'travaux' => 'MainController',
+        ]);
+    }
+
+    #[Route('/mentions', name: '_mentions')]
+    public function mentionsLegales(): Response
+    {
+        return $this->render('main/mentions_legales.html.twig', [
+            'mentions' => 'MainController',
         ]);
     }
 }

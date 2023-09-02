@@ -93,4 +93,12 @@ class AdminMainController extends AbstractController
             'travaux' => 'MainController',
         ]);
     }
+
+    #[Route('/mentions', name: '_mentions')]
+    public function mentionsLegales(): Response
+    {
+        return $this->render('admin/main/mentions_legales_admin.html.twig', [
+            'mentions' => 'AdminMainController',
+        ]);
+    }
 }

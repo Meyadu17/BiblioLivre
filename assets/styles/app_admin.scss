@@ -2,7 +2,15 @@
 @import "variables.scss";
 
 .admin_body_container {
-    padding: 0 5%;
+    margin: 1em auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+
+    & h2 {
+        text-align: center;
+    }
 }
 
 .entete{
@@ -11,18 +19,18 @@
     justify-content: center;
 }
   
-  .pied-page{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 50px;
-    list-style: none;
+    .pied-page{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+        list-style: none;
 
-    & a{
-        background-color: $third;
-        text-decoration-line: none;
-        color: $secondary;
-    }   
+        & a{
+            background-color: $third;
+            text-decoration-line: none;
+            color: $secondary;
+        }
 }
 
 body {

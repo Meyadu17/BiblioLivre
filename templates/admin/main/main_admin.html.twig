@@ -9,8 +9,13 @@
 
 {% block body %}
     <section class="admin_body_container">
-        
         <a class="btn btn-info" href="{{ path('app_admin_main_ajouter') }}" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus" style="color: #3D3D3D;"></i> Nouveau Livre</a>
+    </section>
+    <br>
+    <section class="admin_body_container">
+        <form class="d-flex" role="search">
+            <input type="text" id="search" style="border-radius:5px;margin-top: 5px;border-bottom-color: #70DDFF" placeholder="Recherche livre, auteur, genre">
+        </form>
     </section>
     <br>
     <div class="un-livre">
@@ -39,11 +44,11 @@
                         </div>
 
                         <div class="card-body">
-                            <a class="btn btn-outline-light" href="{{ path('app_admin_main_travaux') }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus"></i> Ajouter à la collection</a>
+                            <a class="btn btn-outline-light card-link" href="{{ path('app_admin_main_travaux') }}" style="color: #3D3D3D;"><i class="ajouter fa-solid fa-circle-plus"></i> Ajouter à ma collection</a>
                         </div>
                         <div class="card-body">
-                            <a class="btn btn-outline-light" href="{{ path('app_admin_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-magnifying-glass"></i> Détail du livre</a>
-                            <a class="btn btn-outline-light" href="{{ path('app_admin_main_modifier', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-pen"></i> Modifier le livre</a>
+                            <a class="btn btn-outline-light card-link" href="{{ path('app_admin_main_voir', {'id' : livre.id}) }}" style="color: #3D3D3D;"><i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre</a>
+                            <a class="btn btn-outline-light card-link" href="{{ path('app_admin_main_modifier', {'id' : livre.id}) }}" style="color: #3D3D3D;"><i class="ajouter fa-solid fa-pen"></i> Modifier le livre</a>
                         </div>
                     </div>
                 </div>

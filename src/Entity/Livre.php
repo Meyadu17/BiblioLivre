@@ -168,6 +168,9 @@ class Livre
         return $this;
     }
 
+    /**
+     * @return Collection<int, Langue>
+     */
     public function getLangue(): ?Langue
     {
         return $this->langue;

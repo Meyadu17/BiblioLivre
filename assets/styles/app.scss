@@ -2,8 +2,17 @@
 @import "variables.scss";
 
 .admin_body_container {
-    padding: 0 5%;
+  margin: 1em auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+
+  & h2 {
+    text-align: center;
+  }
 }
+
 
 .entete{
     display: flex;

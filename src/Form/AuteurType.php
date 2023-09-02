@@ -22,5 +22,4 @@ class AuteurType extends AbstractType
             'data_class' => Auteur::class,
         ]);
     }
-
 }

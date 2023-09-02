@@ -49,7 +49,7 @@ class AdminLangueController extends AbstractController
             $langue = $langueRepository->find($id);
         }
 
-        $form = $this->createForm(LangueRepository::class, $langue);
+        $form = $this->createForm(LangueType::class, $langue);
         $form->handleRequest($request);
 
         if($form->isSubmitted() /*&& $form->isValid()*/) {

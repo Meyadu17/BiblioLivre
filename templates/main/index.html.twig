@@ -35,10 +35,10 @@
                     </div>
                     
                     <div class="card-body">
-                        <a class="btn btn-outline-light" href="https://symfony.com/doc/current/index.html" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus"></i> Ajouter à la collection</a>
+                        <a class="btn btn-outline-light" href="{{ path('app_main_travaux', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="ajouter fa-solid fa-circle-plus"></i> Ajouter à la collection</a>
                     </div>
                     <div class="card-body">
-                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-magnifying-glass"></i> Détail du livre</a>
+                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre</a>
                     </div>
                 </div>
             </div>

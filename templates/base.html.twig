@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}BiblioLivre{% endblock %}</title>
-        <link rel="icon" href="images/book.png">
+        <link rel="icon" href="{{ asset('images/book.png') }}">
         
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -23,7 +23,7 @@
 
             <nav class="navbar navbar-expand-lg" style="background-color: #3D3D3D" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_main_liste') }}">Accueil</a>
+                <a class="menu navbar-brand" href="{{ path('app_main_liste') }}"><i class="menu fa-solid fa-house-chimney"></i> Accueil</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -54,7 +54,7 @@
             <div>
                 <ul class="pied-page">
                     <li><a href="{{ path('app_main_liste') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_main_travaux') }}">Mentions légales</a></li>
+                    <li><a href="{{ path('app_main_mentions') }}">Mentions légales</a></li>
                     <li><a href="{{ path('app_main_travaux') }}">Contact</a></li>
                 </ul>
 

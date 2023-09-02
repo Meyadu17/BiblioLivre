@@ -1,6 +1,6 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}BiblioLivre - Livre{% endblock %}
+{% block title %}BiblioLivre - Editer livre{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -8,62 +8,83 @@
 {% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <section class="admin_body_container">
-        <div class="contenaire">
-            <h1 class="mb-4">{{ app.request.get('_route') == "app_admin_main_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h1>
+        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+            <div class="row g-0">
+                    <h2 class="mb-4">{{ app.request.get('_route') == "app_admin_main_ajouter" ? 'Ajouter' : 'Modifier' }} un livre</h2>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                        <form class="form-floating">
+                            <div class="form-floating mb-3">
+                                {{ form_widget(form.cycle, {'attr':{'class':'form-control'}}) }}
+                                {{ form_label(form.cycle, 'Cycle/Série :', {'attr':{'for':'floatingInput'}}) }}
+                                {{ form_errors(form.cycle) }}
+                            </div>
 
-            <div class="un-livre">
-                <div class="card mb-3" style="width: 50% ; padding: 8px;">
-                    {{ form_start(form) }}
+                            <div class="form-floating mb-3">
+                                {{ form_widget(form.tome, {'attr':{'class':'form-control'}}) }}
+                                {{ form_label(form.tome, 'Tome n° :', {'attr':{'for':'floatingInput'}}) }}
+                                {{ form_errors(form.tome) }}
+                            </div>
 
-                    <form class="row g-3">
-                        <div class="row g-3">
-                            <div class="col-md-12">
-                                {{ form_row(form.cycle) }}
+
+                            <div class="form-floating mb-3">
+                                {{ form_widget(form.titre, {'attr':{'class':'form-control'}}) }}
+                                {{ form_label(form.titre, 'Titre* :', {'attr':{'for':'floatingInput'}}) }}
+                                {{ form_errors(form.titre) }}
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                {{ form_label(form.auteurs, 'Auteur(s)* :') }}
+                                {{ form_widget(form.auteurs) }}
+                                {{ form_errors(form.auteurs) }}
                             </div>
 
                             <div class="col-md-12">
-                                {{ form_row(form.tome) }}
+                                {{ form_label(form.langue, 'Langue* :') }}
+                                {{ form_widget(form.langue, {'attr':{'class':'form-select form-select-sm'}}) }}
+                                {{ form_errors(form.langue) }}
                             </div>
 
                             <div class="col-md-12">
-                                {{ form_row(form.titre) }}
+                                {{ form_label(form.edition, 'Editeur* :') }}
+                                {{ form_widget(form.edition, {'attr':{'class':'form-select form-select-sm'}}) }}
+                                {{ form_errors(form.edition) }}
                             </div>
 
-                            <div class="col-md-12">
-                                {{ form_row(form.auteurs) }}
+                            <div class="form-check form-check-inline">
+                                {{ form_label(form.genres, 'Genre(s)* :') }}
+                                {{ form_widget(form.genres) }}
+                                {{ form_errors(form.genres) }}
                             </div>
 
-                            <div class="col-md-12">
-                                {{ form_widget(form.langue) }}
+                            <div class="form-floating mb-3">
+                                {{ form_widget(form.isbn, {'attr':{'class':'form-control'}}) }}
+                                {{ form_label(form.isbn, 'ISBN/EAN :', {'attr':{'for':'floatingInput'}}) }}
+                                {{ form_errors(form.isbn) }}
                             </div>
 
-                            <div class="col-md-12">
-                                {{ form_row(form.edition) }}
+                            <div class="form-floating mb-3">
+                                {{ form_widget(form.resume, {'attr':{'class':'form-control'}}) }}
+                                {{ form_label(form.resume, 'Résumé* :', {'attr':{'for':'floatingInput'}}) }}
+                                {{ form_errors(form.resume) }}
                             </div>
 
-                            <div class="col-md-12">
-                                {{ form_row(form.genres) }}
+                            <div class="col-sm" style="text-align: center">
+                                <a class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Enregistrer</a>
                             </div>
-
-                            <div class="col-md-12">
-                                {{ form_row(form.isbn) }}
-                            </div>
-
-                            <div class="col-md-12">
-                                {{ form_row(form.resume) }}
-                            </div>
-
-                            <div class="col-sm">
-                                <button class="btn btn-success" type="submit">Enregistrer</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    {{ form_end(form) }}
+                        </form>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>>
 
 {% endblock %}

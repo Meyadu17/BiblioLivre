@@ -16,50 +16,57 @@
     {% endfor %}
 
     <section class="admin_body_container">
-        <div class="contenaire">
-            <h1 class="mb-3">Editer un genre</h1>
-            <div class="un-livre">
-                <div class="card mb-3" style="width: 50% ; padding: 8px;">
-                {{ form_start(form) }}
-
-                <form class="row g-3">
-                    <div class="row g-3">
-                        <div class="col-sm">
-                            {{ form_row(form.libelle) }}
+        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+            <div class="row g-0">
+                <h2 class="mb-4">Nouveau genre</h2>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    <form class="form-floating">
+                        <div class="form-floating mb-3">
+                            {{ form_widget(form.libelle, {'attr':{'class':'form-control'}}) }}
+                            {{ form_label(form.libelle, 'Libelle :', {'attr':{'for':'floatingInput'}}) }}
+                            {{ form_errors(form.libelle) }}
                         </div>
 
-                         <div class="col-sm">
-                             <br>
-                            <button class="btn btn-success" type="submit">Ajouter</button>
-                         </div>
-                    </div>
-                </form>
-
-                {{ form_end(form) }}
+                        <div class="col-sm" style="text-align: center">
+                            <button class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Ajouter</button>
+                        </div>
+                    </form>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </section>
 
     <section class="admin_body_container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Libelle</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody >
-        {% for genre in genres %}
-            <tr>
-                <td>{{genre.libelle}}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('app_admin_genre_modifier', {'id' : genre.id}) }}"><i class="fa-solid fa-pen"></i> Modifier</a>
-                    <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_genre_supprimer', {'id' : genre.id}) }}"><i class="fa-solid fa-trash"></i> Supprimer</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+            <div class="row g-0">
+                <h2 class="mb-4">Liste des genres</h2>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Libelle</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                        {% for genre in genres %}
+                            <tr>
+                                <td>{{genre.libelle}}</td>
+                                <td>
+                                    <a class="btn btn-outline-light card-link" href="{{ path('app_admin_genre_modifier', {'id' : genre.id}) }}" style="color: #3D3D3D;"><i class="ajouter fa-solid fa-pen"></i> Modifier</a>
+                                    <a class="btn btn-outline-light card-link" style="color: #3D3D3D;"
+                                       onclick="return confirm('Vous êtes sur le point de supprimer un genre. Confirmer la suppression ?')"
+                                       href="{{ path('app_admin_genre_supprimer', {'id' : genre.id}) }}">
+                                       <i class="delete fa-solid fa-trash"></i> Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}

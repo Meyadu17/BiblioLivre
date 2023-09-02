@@ -87,10 +87,4 @@ class Langue
 
         return $this;
     }
-
-    public function getCodeLibelle(): ?string
-    {
-        return $this->code . ' - ' . $this->libelle;
-    }
-
 }
