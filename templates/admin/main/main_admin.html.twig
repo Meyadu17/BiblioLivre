@@ -25,7 +25,17 @@
                         <div class="card-body">
                             <h5 class="card-title">{{livre.titre}}</h5>
                             <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
-                            <p class="card-text"><small class="text-body-secondary">Auteur : J. R. R. Tolkien | {{livre.editeur}}</small></p>
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    Auteur : {% for auteur in livre.auteurs %}
+                                                {{auteur.prenomnom}}
+                                                {% if not loop.last%}
+                                                    -
+                                                {% endif %}
+                                            {% endfor %}
+                                    <br>Edition : {{livre.edition.libelle}}
+                                </small>
+                            </p>
                         </div>
 
                         <div class="card-body">

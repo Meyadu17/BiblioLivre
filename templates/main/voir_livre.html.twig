@@ -20,9 +20,19 @@
                         <div class="card-body">
                             <h5 class="card-title">{{livre.titre}}</h5>
                             <p class="card-text">{{livre.cycle}} - {{livre.tome}}</p>
-                            <p class="card-text"><small class="text-body-secondary"><b>Auteur :</b> J. R. R. Tolkien <b>| Edition :</b> {{livre.editeur}}</small></p>
                             <p class="card-text">
-                                <small class="text-body-secondary"><b>Genre :</b>
+                                <small class="text-body-secondary"><b>Auteur(s) :</b>
+                                    {% for auteur in livre.auteurs %}
+                                        {{auteur.prenomnom}}
+                                        {% if not loop.last%}
+                                            -
+                                        {% endif %}
+                                    {% endfor %}
+                                    <b>| Edition :</b> {{livre.edition.libelle}}
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-body-secondary"><b>Genre(s) :</b>
                                     {% for genre in livre.genres %}
                                         {{genre.libelle}}
                                         {% if not loop.last%}
@@ -31,7 +41,7 @@
                                     {% endfor %}
                                 </small>
                             </p>
-                            <p class="card-text"><small class="text-body-secondary"><b>Langue :</b> {{livre.langue}}</small></p>
+                            <p class="card-text"><small class="text-body-secondary"><b>Langue :</b> {{livre.langue.libelle}}</small></p>
                             <p class="card-text"><small class="text-body-secondary"><b>ISBN :</b> {{livre.isbn}}</small></p>
                             <p class="card-text"><small class="text-body-secondary"><b>Résumé :</b><br> {{livre.resume}}</small></p>
                         </div>

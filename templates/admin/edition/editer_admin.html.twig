@@ -1,6 +1,6 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}BiblioLivre - Genre{% endblock %}
+{% block title %}BiblioLivre - Edition{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
 {% block body %}
     <section class="admin_body_container">
         <div class="contenaire">
-            <h1 class="mb-3">Les genres</h1>
+            <h1 class="mb-3">Les maisons d'édition</h1>
             <div class="un-livre">
                 <div class="card mb-3" style="width: 50% ; padding: 8px;">
                     {{ form_start(form) }}
@@ -23,7 +23,7 @@
 
                             <div class="col-sm">
                                 <br>
-                                {% if app.request.get('_route') == "app_admin_genre_ajouter" %}
+                                {% if app.request.get('_route') == "app_admin_edition_ajouter" %}
                                     <br>
                                     <button class="btn btn-success" type="submit">Enregistrer</button>
                                 {% else %}

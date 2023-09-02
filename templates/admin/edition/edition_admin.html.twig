@@ -1,0 +1,65 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}BiblioLivre - Edition {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <section class="admin_body_container">
+        <div class="contenaire">
+            <h1 class="mb-3">Editer une maison d'édition</h1>
+            <div class="un-livre">
+                <div class="card mb-3" style="width: 50% ; padding: 8px;">
+                    {{ form_start(form) }}
+
+                    <form class="row g-3">
+                        <div class="row g-3">
+                            <div class="col-sm">
+                                {{ form_row(form.libelle) }}
+                            </div>
+
+                            <div class="col-sm">
+                                <br>
+                                <button class="btn btn-success" type="submit">Ajouter</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="admin_body_container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Libelle</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody >
+            {% for edition in editions %}
+                <tr>
+                    <td>{{edition.libelle}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('app_admin_edition_modifier', {'id' : edition.id}) }}">Modifier</a>
+                        <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_edition_supprimer', {'id' : edition.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

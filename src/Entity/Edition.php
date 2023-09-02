@@ -2,26 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\LangueRepository;
+use App\Repository\EditionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LangueRepository::class)]
-class Langue
+#[ORM\Entity(repositoryClass: EditionRepository::class)]
+class Edition
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 3)]
-    private ?string $code = null;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'langue', targetEntity: Livre::class)]
+    #[ORM\OneToMany(mappedBy: 'Livre', targetEntity: Livre::class)]
     private Collection $livres;
 
     public function __construct()
@@ -32,18 +29,6 @@ class Langue
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): static
-    {
-        $this->code = $code;
-
-        return $this;
     }
 
     public function getLibelle(): ?string
@@ -69,8 +54,8 @@ class Langue
     public function addLivre(Livre $livre): static
     {
         if (!$this->livres->contains($livre)) {
-            $this->livre->add($livre);
-            $livre->setLangue($this);
+            $this->livres->add($livre);
+            $livre->setLivre($this);
         }
 
         return $this;
@@ -80,17 +65,11 @@ class Langue
     {
         if ($this->livres->removeElement($livre)) {
             // set the owning side to null (unless already changed)
-            if ($livre->getLangue() === $this) {
-                $livre->setLangue(null);
+            if ($livre->getLivre() === $this) {
+                $livre->setLivre(null);
             }
         }
 
         return $this;
     }
-
-    public function getCodeLibelle(): ?string
-    {
-        return $this->code . ' - ' . $this->libelle;
-    }
-
 }

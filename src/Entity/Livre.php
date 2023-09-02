@@ -25,9 +25,6 @@ class Livre
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $editeur = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $isbn = null;
 
@@ -40,8 +37,11 @@ class Livre
     #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'livre')]
     private Collection $genres;
 
-    #[ORM\ManyToOne(inversedBy: 'livre')]
+    #[ORM\ManyToOne(inversedBy: 'livres')]
     private ?Langue $langue = null;
+
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    private ?Edition $edition = null;
 
     public function __construct()
     {
@@ -86,18 +86,6 @@ class Livre
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getEditeur(): ?string
-    {
-        return $this->editeur;
-    }
-
-    public function setEditeur(string $editeur): static
-    {
-        $this->editeur = $editeur;
 
         return $this;
     }
@@ -188,6 +176,18 @@ class Livre
     public function setLangue(?Langue $langue): static
     {
         $this->langue = $langue;
+
+        return $this;
+    }
+
+    public function getEdition(): ?Edition
+    {
+        return $this->edition;
+    }
+
+    public function setEdition(?Edition $edition): static
+    {
+        $this->edition = $edition;
 
         return $this;
     }

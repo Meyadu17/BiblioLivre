@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Auteur;
+use App\Entity\Edition;
 use App\Entity\Genre;
 use App\Entity\Langue;
 use App\Entity\Livre;
@@ -37,7 +38,10 @@ class LivreType extends AbstractType
                 'class' => Langue::class,
                 'choice_label' => 'libelle',
             ])
-            ->add('editeur')
+            ->add('edition', EntityType::class, [
+                'class' => Edition::class,
+                'choice_label' => 'libelle',
+            ])
             ->add('isbn')
             ->add('resume')
         ;
