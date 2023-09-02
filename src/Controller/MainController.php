@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/main', name: 'app_main')]
 class MainController extends AbstractController{
-    
+
     #[Route('/', name: '_liste')]
     public function lister(LivreRepository $livreRepository): Response
     {
@@ -25,6 +25,24 @@ class MainController extends AbstractController{
 
         return  $this->render('main/voir_livre.html.twig', [
             'livre' => $livre,
+        ]);
+    }
+
+    #[Route('/meslivres', name: '_livres')]
+    public function mesLivres(LivreRepository $livreRepository): Response
+    {
+        $livres = $livreRepository->findAll();
+
+        return $this->render('main/mes_livres.html.twig', [
+            'livres' => $livres,
+        ]);
+    }
+
+    #[Route('/travaux', name: '_travaux')]
+    public function travaux(): Response
+    {
+        return $this->render('main/en_travaux.html.twig', [
+            'travaux' => 'MainController',
         ]);
     }
 }

@@ -54,8 +54,8 @@
                 <tr>
                     <td>{{edition.libelle}}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('app_admin_edition_modifier', {'id' : edition.id}) }}">Modifier</a>
-                        <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_edition_supprimer', {'id' : edition.id}) }}">Supprimer</a>
+                        <a class="btn btn-primary" href="{{ path('app_admin_edition_modifier', {'id' : edition.id}) }}"><i class="fa-solid fa-pen"> Modifier</a>
+                        <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_edition_supprimer', {'id' : edition.id}) }}"><i class="fa-solid fa-trash"></i> Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

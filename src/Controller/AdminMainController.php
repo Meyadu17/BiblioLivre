@@ -75,4 +75,22 @@ class AdminMainController extends AbstractController
             'livre' => $livre,
         ]);
     }
+
+    #[Route('/meslivres', name: '_livres')]
+    public function mesLivres(LivreRepository $livreRepository): Response
+    {
+        $livres = $livreRepository->findAll();
+
+        return $this->render('admin/main/mes_livres_admin.html.twig', [
+            'livres' => $livres,
+        ]);
+    }
+
+    #[Route('/travaux', name: '_travaux')]
+    public function travaux(): Response
+    {
+        return $this->render('admin/main/en_travaux_admin.html.twig', [
+            'travaux' => 'MainController',
+        ]);
+    }
 }

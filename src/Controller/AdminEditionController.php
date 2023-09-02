@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/editeur', name: 'app_admin_edition')]
-#[Route('/admin/editeur', name: 'app_admin_edition')]
 class AdminEditionController extends AbstractController
 {
     #[Route('/', name: '_liste')]
@@ -32,7 +31,7 @@ class AdminEditionController extends AbstractController
 
         $edition = $editionRepository->findAll();
 
-        return $this->render('admin/edition/editer_admin.html.twig', [
+        return $this->render('admin/edition/edition_admin.html.twig', [
             'editions' => $edition,
             'form' => $form,
         ]);

@@ -1,0 +1,27 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Travaux{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block body %}
+    <section class="admin_body_container">
+        <div class="un-livre">
+            <div class="card" style="width: 50%;">
+                <img src="{{ asset('images/travaux.jpeg') }}" class="img-fluid rounded-start" alt="Le seigneur des anneaux">
+                <div class="card-body">
+                </div>
+                <ul class="list-group list-group-flush">
+                    <h5 class="card-title" style="text-align: center">Cette page est en cours de construction</h5>
+                </ul>
+                <div class="card-body" style="text-align: center">
+                    <a class="btn btn-outline-light" href="{{ path('app_admin_main_liste') }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-house"></i> Retour à l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

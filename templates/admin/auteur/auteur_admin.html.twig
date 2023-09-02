@@ -61,8 +61,8 @@
                 <td>{{auteur.prenom}}</td>
                 <td>{{auteur.nom}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_admin_auteur_modifier', {'id' : auteur.id}) }}">Modifier</a>
-                    <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_auteur_supprimer', {'id' : auteur.id}) }}">Supprimer</a>
+                    <a class="btn btn-primary" href="{{ path('app_admin_auteur_modifier', {'id' : auteur.id}) }}"><i class="fa-solid fa-pen"></i> Modifier</a>
+                    <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr ?')" href="{{ path('app_admin_auteur_supprimer', {'id' : auteur.id}) }}"><i class="fa-solid fa-trash"></i> Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

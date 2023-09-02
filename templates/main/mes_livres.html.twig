@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BiblioLivre - Livre{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block body %}
+    <section class="admin_body_container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Cycle</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Langue</th>
+                <th scope="col">Edition</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody >
+            {% for livre in livres %}
+                <tr>
+                    <td>{{livre.cycle}}</td>
+                    <td>{{livre.tome}} - {{livre.titre}}</td>
+                    <td>
+                        {% for auteur in livre.auteurs %}
+                            {{auteur.prenomnom}}
+                            {% if not loop.last%}
+                                -
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for genre in livre.genres %}
+                            {{genre.libelle}}
+                            {% if not loop.last%}
+                                -
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{livre.langue.libelle}}</td>
+                    <td>{{livre.edition.libelle}}</td>
+                    <td>
+                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-magnifying-glass"></i> Détail du livre</a>
+                        <a class="btn btn-outline-light" href="{{ path('app_main_travaux', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="fa-solid fa-trash"></i> Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
