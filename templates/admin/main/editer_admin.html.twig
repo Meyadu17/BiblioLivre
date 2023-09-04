@@ -43,8 +43,10 @@
 
                             <div class="form-check form-check-inline">
                                 {{ form_label(form.auteurs, 'Auteur(s)* :') }}
+                                <div class="three-column-list">
                                 {{ form_widget(form.auteurs) }}
                                 {{ form_errors(form.auteurs) }}
+                                </div>
                             </div>
 
                             <div class="col-md-12">

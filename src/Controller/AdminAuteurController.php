@@ -29,7 +29,7 @@ class AdminAuteurController extends AbstractController {
         $entityManager->flush();
     }
 
-    $auteurs = $auteurRepository->findAll();
+    $auteurs = $auteurRepository->findBy([],/*Aucun critère de recherche particulier*/ ['nom' => 'ASC'],/*Clause 'ORDER BY' pour trier par 'id' en ordre décroissant*/);
 
     return $this->render('admin/auteur/auteur_admin.html.twig', [
         'auteurs' => $auteurs,
