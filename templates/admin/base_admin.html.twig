@@ -51,9 +51,20 @@
                             <a class="nav-link" href="{{ path('app_admin_edition_liste') }}"><i class="fa-solid fa-gear"></i> Editeurs</a>
                         </li>
                     </ul>
-                    <span class="navbar-text">
-                        <a class="nav-link" href="{{ path('app_main_livres') }}">Visiteur</a>
-                    </span>
+                        <span class="navbar-text">
+                            {% if app.user is null %}
+                                <span class="navbar-text">
+                                    <a class="nav-link" href="{{ path('app_login') }}">Connexion </a>
+                                <span>
+                            {% else %}
+                                <span class="navbar-text">
+                                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                                </span>
+                                <span class="navbar-text">
+                                    <a class="nav-link" href="{{ path('app_admin_main_livres') }}">Bonjour {{ app.user.pseudo }}</a>
+                                </span>
+                            {% endif %}
+                        </span>
                     </div>
                 </div>
             </nav>
