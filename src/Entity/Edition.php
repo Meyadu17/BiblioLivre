@@ -18,7 +18,7 @@ class Edition
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'Livre', targetEntity: Livre::class)]
+    #[ORM\OneToMany(mappedBy: 'edition', targetEntity: Livre::class)]
     private Collection $livres;
 
     public function __construct()
