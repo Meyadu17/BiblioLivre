@@ -54,7 +54,7 @@ class AdminMainController extends AbstractController
             $entityManager->persist($livre); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
             
-            //message de sucés et redirection sur la liste des livres
+            //message de succés et redirection sur la liste des livres
             $this->addFlash(
                         'success',
                         'le livre à bien été édité !'

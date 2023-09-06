@@ -7,3 +7,6 @@ controllers:
 home:
     path: /
     controller: App\Controller\MainController::lister
+
+app_logout:
+    path: /logout

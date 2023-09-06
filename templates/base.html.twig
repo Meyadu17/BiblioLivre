@@ -33,34 +33,31 @@
 
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ path('app_main_travaux') }}">Mes bibliothèques</a>
+                                <a class="nav-link" aria-current="page" href="{{ path('app_bibliotheque_liste') }}">Mes bibliothèques</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_main_livres') }}">Mes livres</a>
                             </li>
                         </ul>
 
-                        <span class="navbar-text">
-                            {% if app.user is null %}
+                        {% if app.user is null %}
 
                             <span class="navbar-text">
-                                <a class="nav-link" href="{{ path('app_login') }}">Connexion </a>
+                                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
                             </span>
 
-                            {% else %}
+                        {% else %}
 
-                                <span class="navbar-text">
-                                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                                </span>
+                            <span class="navbar-text">
+                                <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion - </a>
+                            </span>
 
-                                <span class="navbar-text">
-                                    <a class="nav-link" href="{{ path('app_admin_main_livres') }}">Bonjour {{ app.user.pseudo }}</a>
-                                </span>
+                            <span class="navbar-text">
+                                <a class="nav-link" href="{{ path('app_admin_main_livres') }}">- Bonjour {{ app.user.pseudo }}</a>
+                            </span>
 
-                            {% endif %}
-                        </span>
+                        {% endif %}
 
-                        </span>
                     </div>
                 </div>
             </nav>

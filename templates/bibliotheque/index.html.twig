@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BiblioLivre{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block body %}
+    <section class="admin_body_container">
+        <a class="btn btn-info" href="{{ path('app_bibliotheque_ajouter') }}" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus" style="color: #3D3D3D;"></i> Nouvelle bibliothèque</a>
+    </section>
+
+    <section class="admin_body_container">
+        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+            <div class="row g-0">
+                <h2 class="mb-4">Liste des mes bibliothèques</h2>
+                <div class="card-body">
+                    {% for bibliotheque in bibliotheques %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{bibliotheque.nom}}</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr>
+                                <table class="table table-striped" title="Biblio 1">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Cycle</th>
+                                        <th scope="col">Titre</th>
+                                        <th scope="col">Auteur</th>
+                                        <th scope="col">Genre</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody >
+                                    {% for livre in bibliotheque.livres %}
+                                        <tr>
+                                            <td>{{livre.cycle}}</td>
+                                            <td>{{livre.tome}} - {{livre.titre}}</td>
+                                            <td>
+                                                {% for auteur in livre.auteurs %}
+                                                    {{auteur.prenomnom}}
+                                                    {% if not loop.last%}
+                                                        -
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for genre in livre.genres %}
+                                                    {{genre.libelle}}
+                                                    {% if not loop.last%}
+                                                        -
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <th>
+                                                <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="detail card-link" style="color: #3D3D3D;"><i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre</a>
+                                                <a class="btn btn-outline-light" href="{{ path('app_bibliotheque_supprimer', {'id' : livre.id}) }}" class="delete card-link" style="color: #3D3D3D;"><i class="delete fa-solid fa-trash"></i> Supprimer</a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

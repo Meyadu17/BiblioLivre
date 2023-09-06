@@ -43,10 +43,14 @@ class Livre
     #[ORM\ManyToOne(inversedBy: 'livres')]
     private ?Edition $edition = null;
 
+    #[ORM\ManyToMany(targetEntity: Bibliotheque::class, inversedBy: 'livres')]
+    private Collection $bibliotheques;
+
     public function __construct()
     {
         $this->auteurs = new ArrayCollection();
         $this->genres = new ArrayCollection();
+        $this->bibliotheques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,5 +197,33 @@ class Livre
         $this->edition = $edition;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Bibliotheque>
+     */
+    public function getBibliotheques(): Collection
+    {
+        return $this->bibliotheques;
+    }
+
+    public function addBibliotheque(Bibliotheque $bibliotheque): static
+    {
+        if (!$this->bibliotheques->contains($bibliotheque)) {
+            $this->bibliotheques->add($bibliotheque);
+        }
+
+        return $this;
+    }
+
+    public function removeBibliotheque(Bibliotheque $bibliotheque): static
+    {
+
+        $this->bibliotheque->removeLivre($bibliotheque);
+
+        return $this;
+    }
+    public function getnomComplet(){
+        return $this->cycle.' '.$this->tome.' '.$this->titre;
     }
 }
