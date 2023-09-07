@@ -16,9 +16,9 @@ class AdminEditionController extends AbstractController
 {
     #[Route('/', name: '_liste')]
     public function lister(Request $request,
-                           EntityManagerInterface $entityManager,
-                           EditionRepository $editionRepository
-    ):Response {
+                            EntityManagerInterface $entityManager,
+                            EditionRepository $editionRepository
+                            ):Response {
         $edition = new Edition();
 
         $form = $this->createForm(EditionType::class, $edition);
