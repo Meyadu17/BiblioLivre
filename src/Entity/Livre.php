@@ -46,6 +46,9 @@ class Livre
     #[ORM\ManyToMany(targetEntity: Bibliotheque::class, inversedBy: 'livres')]
     private Collection $bibliotheques;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $couverture = null;
+
     public function __construct()
     {
         $this->auteurs = new ArrayCollection();
@@ -225,5 +228,17 @@ class Livre
     }
     public function getnomComplet(){
         return $this->cycle.' '.$this->tome.' '.$this->titre;
+    }
+
+    public function getCouverture(): ?string
+    {
+        return $this->couverture;
+    }
+
+    public function setCouverture(?string $couverture): static
+    {
+        $this->couverture = $couverture;
+
+        return $this;
     }
 }

@@ -45,6 +45,17 @@ class BibliothequeController extends AbstractController
         }else{
             //S'il existe, on est dans le cas de la modification
             $bibliotheque = $bibliothequeRepository->find($id);
+
+
+            //je controlle que le bien appartient au b bon gestonnaire
+            if($bibliotheque->getUser() !== $this->getUser()){
+                $this->addFlash(
+                    'danger',
+                    'Non petit coquin, je sais où tu habites !'
+                );
+
+                return $this->redirectToRoute('app_bibliotheque_liste');
+            }
         }
 
         $form = $this->createForm(BibliothequeType::class, $bibliotheque);

@@ -9,8 +9,10 @@ use App\Entity\Langue;
 use App\Entity\Livre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class LivreType extends AbstractType
 {
@@ -44,6 +46,21 @@ class LivreType extends AbstractType
             ])
             ->add('isbn')
             ->add('resume')
+            ->add('imagePrincipale', FileType::class, [
+                'label' => 'Photo du bien',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Veillez télécharger un PNG ou un JPEG',
+                    ])
+                ],
+            ])
         ;
     }
 
