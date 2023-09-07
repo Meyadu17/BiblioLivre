@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Bibliotheque::class)]
+    private Collection $bibliotheques;
+
+    public function __construct()
+    {
+        $this->bibliotheques = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +135,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Bibliotheque>
+     */
+    public function getBibliotheques(): Collection
+    {
+        return $this->bibliotheques;
+    }
+
+    public function addBibliotheque(Bibliotheque $bibliotheque): static
+    {
+        if (!$this->bibliotheques->contains($bibliotheque)) {
+            $this->bibliotheques->add($bibliotheque);
+            $bibliotheque->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBibliotheque(Bibliotheque $bibliotheque): static
+    {
+        if ($this->bibliotheques->removeElement($bibliotheque)) {
+            // set the owning side to null (unless already changed)
+            if ($bibliotheque->getUser() === $this) {
+                $bibliotheque->setUser(null);
+            }
+        }
 
         return $this;
     }

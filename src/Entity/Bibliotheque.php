@@ -21,6 +21,9 @@ class Bibliotheque
     #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'bibliotheques')]
     private Collection $livres;
 
+    #[ORM\ManyToOne(inversedBy: 'bibliotheques')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->livres = new ArrayCollection();
@@ -63,8 +66,21 @@ class Bibliotheque
 
     public function removeLivre(Livre $livre): static
     {
-        $this->livres->removeElement($livre);
+        if ($this->livres->removeElement($livre)){
         $livre->removeBibliotheque($this);
+    }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

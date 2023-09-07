@@ -9,12 +9,6 @@
 
 {% block body %}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <section class="admin_body_container">
         <div class="card mb-3" style="width: 80% ; padding: 8px;">
             <div class="row g-0">
@@ -37,7 +31,7 @@
                             </div>
 
                             <div class="col-sm" style="text-align: center">
-                                <a class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Enregistrer</a>
+                                <button class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Enregistrer</button>
                             </div>
                         </form>
                         {{ form_end(form) }}

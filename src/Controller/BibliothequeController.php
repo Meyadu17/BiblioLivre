@@ -17,7 +17,15 @@ class BibliothequeController extends AbstractController
     #[Route('/liste', name: '_liste')]
     public function index(BibliothequeRepository $bibliothequeRepository): Response
     {
-        $bibliotheques = $bibliothequeRepository->findAll();
+        //recupération de l'id du user connecté
+        $user = $this->getUser();
+        //récupérer les bibliothèques associées à cet utilisateur
+        if ($user) {
+            $bibliotheques = $user->getBibliotheques();
+        }else{
+            return $this->redirectToRoute('app_login');
+        }
+
 
         return $this->render('bibliotheque/index.html.twig', [
             'bibliotheques' => $bibliotheques,
@@ -47,6 +55,8 @@ class BibliothequeController extends AbstractController
         //si le formulaire est soumis et est valide
         if($form->isSubmitted() /*&& $form->isValid()*/) {
 
+            //set le user de la personne connecté
+            $bibliotheque->setUser($this->getUser());
             //traitement des données
             $entityManager->persist($bibliotheque); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
