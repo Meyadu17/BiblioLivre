@@ -22,7 +22,7 @@ class BibliothequeController extends AbstractController
         //récupérer les bibliothèques associées à cet utilisateur
         if ($user) {
             $bibliotheques = $user->getBibliotheques();
-        }else{
+        } else {
             return $this->redirectToRoute('app_login');
         }
 
@@ -31,24 +31,25 @@ class BibliothequeController extends AbstractController
             'bibliotheques' => $bibliotheques,
         ]);
     }
+
     #[Route('/ajouter', name: '_ajouter')]
     #[Route('/modifier/{id}', name: '_modifier')]
-    public function editer(Request $request,
+    public function editer(Request                $request,
                            EntityManagerInterface $entityManager,
                            BibliothequeRepository $bibliothequeRepository,
-                           int $id = null):Response
+                           int                    $id = null): Response
     {
 
-        if($id == null){
+        if ($id == null) {
             //Si id null, c'est que l'on créer le bien
             $bibliotheque = new Bibliotheque();
-        }else{
+        } else {
             //S'il existe, on est dans le cas de la modification
             $bibliotheque = $bibliothequeRepository->find($id);
 
 
             //je controlle que le bien appartient au b bon gestonnaire
-            if($bibliotheque->getUser() !== $this->getUser()){
+            if ($bibliotheque->getUser() !== $this->getUser()) {
                 $this->addFlash(
                     'danger',
                     'Non petit coquin, je sais où tu habites !'
@@ -64,7 +65,7 @@ class BibliothequeController extends AbstractController
         $form->handleRequest($request);
 
         //si le formulaire est soumis et est valide
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             //set le user de la personne connecté
             $bibliotheque->setUser($this->getUser());
@@ -81,15 +82,16 @@ class BibliothequeController extends AbstractController
             return $this->redirectToRoute('app_bibliotheque_liste');
         }
 
-        return  $this->render('bibliotheque/editer_bibliotheque.html.twig', [
+        return $this->render('bibliotheque/editer_bibliotheque.html.twig', [
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: '_voir', requirements: ['id' => '\d+'])]
-    public function voir(Bibliotheque $bibliotheque):Response {
+    public function voir(Bibliotheque $bibliotheque): Response
+    {
 
-        return  $this->render('bibliotheque/voir_bibliotheque.html.twig', [
+        return $this->render('bibliotheque/voir_bibliotheque.html.twig', [
             'bibliotheque' => $bibliotheque,
         ]);
     }
@@ -97,7 +99,8 @@ class BibliothequeController extends AbstractController
     #[Route('/supprimer/{id}', name: '_supprimer')]
     public function suprimer(EntityManagerInterface $entityManager,
                              BibliothequeRepository $bibliothequeRepository,
-                             int $id):Response {
+                             int                    $id): Response
+    {
 
         $bibliotheque = $bibliothequeRepository->find($id);
 
@@ -108,6 +111,7 @@ class BibliothequeController extends AbstractController
             'success',
             'la bibliothèque a bien été suprimée.');
 
-        return  $this->redirectToRoute('app_bibliotheque_liste');
+        return $this->redirectToRoute('app_bibliotheque_liste');
     }
+
 }

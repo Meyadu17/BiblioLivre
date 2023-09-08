@@ -222,7 +222,10 @@ class Livre
     public function removeBibliotheque(Bibliotheque $bibliotheque): static
     {
 
-        $this->bibliotheque->removeLivre($bibliotheque);
+        if ($this->bibliotheques->contains($bibliotheque)) {
+            $this->bibliotheques->removeElement($bibliotheque);
+            $bibliotheque->removeLivre($this);
+        }
 
         return $this;
     }

@@ -35,9 +35,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="{{ path('app_bibliotheque_liste') }}">Mes bibliothèques</a>
                             </li>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_main_livres') }}">Mes livres</a>
+                                <a class="nav-link" href="{{ path('app_admin_main_liste') }}">Administration</a>
                             </li>
+                            {% endif %}
                         </ul>
 
                         {% if app.user is null %}
@@ -53,7 +55,7 @@
                             </span>
 
                             <span class="navbar-text">
-                                <a class="nav-link" href="{{ path('app_admin_main_livres') }}">- Bonjour {{ app.user.pseudo }}</a>
+                                <a class="nav-link" href="{{ path('app_profil') }}">- Bonjour {{ app.user.pseudo }}</a>
                             </span>
 
                         {% endif %}
