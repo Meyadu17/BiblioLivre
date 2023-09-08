@@ -8,15 +8,21 @@
 {% endblock %}
 
 {% block body %}
+
     <section class="admin_body_container">
         <a class="btn btn-info" href="{{ path('app_admin_main_ajouter') }}" style="color: #3D3D3D;"><i class="fa-solid fa-circle-plus" style="color: #3D3D3D;"></i> Nouveau Livre</a>
     </section>
     <br>
     <section class="admin_body_container">
-        <form class="d-flex" role="search">
-            <input type="text" id="search" style="border-radius:5px;margin-top: 5px;border-bottom-color: #70DDFF" placeholder="Recherche livre, auteur, genre">
+        <form action="{{ path('app_admin_main_rechercher') }}" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="q" placeholder="Rechercher un livre..." aria-label="Rechercher" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+            </div>
         </form>
     </section>
+
+
     <br>
     <div class="un-livre">
         {% for livre in livres %}

@@ -29,7 +29,7 @@ class AdminEditionController extends AbstractController
             $entityManager->flush();
         }
 
-        $edition = $editionRepository->findAll();
+        $edition = $editionRepository->findBy([], ['libelle' => 'ASC']);
 
         return $this->render('admin/edition/edition_admin.html.twig', [
             'editions' => $edition,

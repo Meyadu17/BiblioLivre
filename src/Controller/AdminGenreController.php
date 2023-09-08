@@ -28,7 +28,7 @@ class AdminGenreController extends AbstractController {
             $entityManager->flush();
         }
 
-        $genres = $genreRepository->findAll();
+        $genres = $genreRepository->findBy([],['libelle' => 'ASC']);
 
         return $this->render('admin/genre/genre_admin.html.twig', [
             'genres' => $genres,

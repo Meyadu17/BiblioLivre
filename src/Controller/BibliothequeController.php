@@ -104,6 +104,7 @@ class BibliothequeController extends AbstractController
 
         $bibliotheque = $bibliothequeRepository->find($id);
 
+
         $entityManager->remove($bibliotheque);
         $entityManager->flush();
 

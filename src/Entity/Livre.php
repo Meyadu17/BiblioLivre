@@ -244,4 +244,8 @@ class Livre
 
         return $this;
     }
+
+    public function getTitreComplet(){
+        return $this->cycle.' '.$this->tome.' '.$this->titre;
+    }
 }

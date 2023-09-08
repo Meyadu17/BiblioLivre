@@ -14,7 +14,7 @@ class MainController extends AbstractController{
     #[Route('/', name: '_liste')]
     public function lister(LivreRepository $livreRepository): Response
     {
-        $livres = $livreRepository->findAll();
+        $livres = $livreRepository->findBy([],['cycle' => 'ASC']);
 
         return $this->render('main/index.html.twig', [
             'livres' => $livres,

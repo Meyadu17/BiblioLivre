@@ -30,7 +30,7 @@ class AdminLangueController extends AbstractController
             $entityManager->flush();
         }
 
-        $langues = $langueRepository->findAll();
+        $langues = $langueRepository->findBy([],['libelle' => 'ASC']);
 
         return $this->render('admin/langue/langue_admin.html.twig', [
             'langues' => $langues,

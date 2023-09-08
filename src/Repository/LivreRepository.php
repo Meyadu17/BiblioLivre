@@ -20,6 +20,21 @@ class LivreRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Livre::class);
     }
+    public function searchLivres($searchTerm)
+    {
+        $query = $this->createQueryBuilder('l')
+            ->leftJoin('l.auteurs', 'a')
+            ->leftJoin('l.edition', 'e')
+            ->where('l.cycle LIKE :searchTerm')
+            ->orWhere('l.titre LIKE :searchTerm')
+            ->orWhere('a.prenom LIKE :searchTerm')
+            ->orWhere('a.nom LIKE :searchTerm')
+            ->orWhere('e.libelle LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Livre[] Returns an array of Livre objects

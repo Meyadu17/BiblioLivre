@@ -18,7 +18,7 @@ class AdminMainController extends AbstractController
     #[Route('/', name: '_liste')]
     public function lister(LivreRepository $livreRepository): Response
     {
-        $livres = $livreRepository->findAll();
+        $livres = $livreRepository->findBy([],['cycle' => 'ASC']);
 
         return $this->render('admin/main/main_admin.html.twig', [
             'livres' => $livres,
@@ -108,4 +108,18 @@ class AdminMainController extends AbstractController
             'mentions' => 'AdminMainController',
         ]);
     }
+
+
+    #[Route('/rechercher', name: '_rechercher')]
+    public function rechercher(Request $request, LivreRepository $livreRepository): Response
+    {
+        $searchTerm = $request->query->get('q'); // Récupérez le terme de recherche depuis la requête GET
+
+        $livres = $livreRepository->searchLivres($searchTerm);
+
+        return $this->render('admin/main/main_admin.html.twig', [
+            'livres' => $livres,
+        ]);
+    }
+
 }
