@@ -64,7 +64,7 @@ class BibliothequeController extends AbstractController
         $form->handleRequest($request);
 
         //si le formulaire est soumis et est valide
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
 
             //set le user de la personne connecté
             $bibliotheque->setUser($this->getUser());

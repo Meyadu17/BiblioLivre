@@ -23,7 +23,7 @@ class AdminGenreController extends AbstractController {
         $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($genre);
             $entityManager->flush();
         }
@@ -51,7 +51,7 @@ class AdminGenreController extends AbstractController {
         $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($genre);
             $entityManager->flush();
 

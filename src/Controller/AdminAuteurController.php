@@ -24,7 +24,7 @@ class AdminAuteurController extends AbstractController {
     $form = $this->createForm(AuteurType::class, $auteur);
     $form->handleRequest($request);
 
-    if($form->isSubmitted() /*&& $form->isValid()*/) {
+    if($form->isSubmitted() && $form->isValid()) {
         $entityManager->persist($auteur);
         $entityManager->flush();
     }
@@ -53,7 +53,7 @@ class AdminAuteurController extends AbstractController {
         $form = $this->createForm(AuteurType::class, $auteur);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($auteur);
             $entityManager->flush();
             

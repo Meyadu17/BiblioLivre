@@ -46,8 +46,8 @@ class LivreType extends AbstractType
             ])
             ->add('isbn')
             ->add('resume')
-            ->add('imagePrincipale', FileType::class, [
-                'label' => 'Photo du bien',
+            ->add('couverture', FileType::class, [
+                'label' => 'Couverture du livre',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

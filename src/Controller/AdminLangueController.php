@@ -21,10 +21,11 @@ class AdminLangueController extends AbstractController
                             ):Response {
         $langue = new Langue();
 
+
         $form = $this->createForm(LangueType::class, $langue);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($langue);
             $entityManager->flush();
         }
@@ -52,7 +53,7 @@ class AdminLangueController extends AbstractController
         $form = $this->createForm(LangueType::class, $langue);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($langue);
             $entityManager->flush();
 

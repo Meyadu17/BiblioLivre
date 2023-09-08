@@ -21,7 +21,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">{{bibliotheque.nom}} - <a href="{{ path('app_bibliotheque_modifier', {'id' : bibliotheque.id}) }}"><i class="fa-solid fa-pen"></i></a></th>
+                                <th scope="col">{{bibliotheque.nom}} -
+                                    <a href="{{ path('app_bibliotheque_modifier', {'id' : bibliotheque.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="{{ path('app_bibliotheque_supprimer', {'id' : bibliotheque.id}) }}"><i class="delete fa-solid fa-trash"></i></a></th>
                             </tr>
                         </thead>
                         <tbody >

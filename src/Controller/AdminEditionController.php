@@ -24,7 +24,7 @@ class AdminEditionController extends AbstractController
         $form = $this->createForm(EditionType::class, $edition);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($edition);
             $entityManager->flush();
         }
@@ -52,7 +52,7 @@ class AdminEditionController extends AbstractController
         $form = $this->createForm(EditionType::class, $edition);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($edition);
             $entityManager->flush();
 

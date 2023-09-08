@@ -14,8 +14,7 @@
             <div class="row g-0">
                     <h2 class="mb-4">{{ app.request.get('_route') == "app_bibliotheque_ajouter" ? 'Ajouter' : 'Modifier' }} une bibliothèque</h2>
                     <div class="card-body">
-                        {{ form_start(form) }}
-                        <form class="form-floating">
+                        {{ form_start(form, {'attr':{'class':'form-floating'}}) }}
                             <div class="form-floating mb-3">
                                 {{ form_widget(form.nom, {'attr':{'class':'form-control'}}) }}
                                 {{ form_label(form.nom, 'Nom :', {'attr':{'for':'floatingInput'}}) }}
@@ -33,7 +32,6 @@
                             <div class="col-sm" style="text-align: center">
                                 <button class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Enregistrer</button>
                             </div>
-                        </form>
                         {{ form_end(form) }}
                     </div>
                 </div>

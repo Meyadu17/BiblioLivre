@@ -18,10 +18,9 @@
     <section class="admin_body_container">
         <div class="card mb-3" style="width: 80% ; padding: 8px;">
             <div class="row g-0">
-                <h2 class="mb-4">Nouvelle maison d'édition</h1>
+                <h2 class="mb-4">Nouvelle maison d'édition</h2>
                     <div class="card-body">
-                        {{ form_start(form) }}
-                        <form class="form-floating">
+                        {{ form_start(form, {'attr':{'class':'form-floating'}}) }}
                             <div class="form-floating mb-3">
                                 {{ form_widget(form.libelle, {'attr':{'class':'form-control'}}) }}
                                 {{ form_label(form.libelle, 'Nom* :', {'attr':{'for':'floatingInput'}}) }}
@@ -31,7 +30,6 @@
                             <div class="col-sm" style="text-align: center">
                                 <button class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Ajouter</button>
                             </div>
-                        </form>
                         {{ form_end(form) }}
                     </div>
             </div>

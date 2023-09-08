@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Livre;
 use App\Form\LivreType;
 use App\Repository\LivreRepository;
+use App\Service\UploadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,8 @@ class AdminMainController extends AbstractController
     #[Route('/modifier/{id}', name: '_modifier')]
     public function editer(Request $request, 
                            EntityManagerInterface $entityManager,
-                           LivreRepository $livreRepository, 
+                           LivreRepository $livreRepository,
+                           UploadService $uploadService,
                            int $id = null):Response
     {
 
@@ -48,8 +50,13 @@ class AdminMainController extends AbstractController
         $form->handleRequest($request);
 
         //si le formulaire est soumis et est valide
-        if($form->isSubmitted() /*&& $form->isValid()*/) {
+        if($form->isSubmitted() && $form->isValid()) {
 
+            //Upload de l'image
+            if($form->get('couverture')->getData()) {
+                $newFilename = $uploadService->upload($form->get('couverture')->getData(), $this->getParameter('couvertures_directory'));
+                $livre->setCouverture($newFilename);
+            }
             //traitement des données
             $entityManager->persist($livre); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
