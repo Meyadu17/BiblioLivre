@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -29,6 +30,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[RollerworksPassword\PasswordRequirements(
+        minLength: 8,
+        requireLetters: true,
+        tooShortMessage: "Votre mot de passe doit faire au moins 8 caractères",
+        missingLettersMessage: "Votre mot de passe doit contenir au moins 1 lettre"
+    )]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]

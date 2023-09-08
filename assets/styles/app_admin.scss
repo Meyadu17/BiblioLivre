@@ -40,6 +40,10 @@ body {
         & h1 {
             color: $secondary;
         }
+
+        .span-button{
+            padding: 0 10px
+        }
     }
 
     & main {
@@ -58,6 +62,7 @@ body {
         color: $secondary;
     }
 }
+
 .three-column-list {
     -moz-column-count: 2;
     -moz-column-gap: 10px;
