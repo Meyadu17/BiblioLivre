@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %} BiblioLivre{% endblock %}</title>
+        <title>Admin - {% block title %}{% endblock %}</title>
         <link rel="icon" href="{{ asset('images/book.png') }}">
 
         {% block stylesheets %}
@@ -18,7 +18,7 @@
         <header>
             <div class="entete">
                 <img class="logo" src="{{ asset('images/book.png') }}"  width=3% height=3% >
-                <h1> Bibliolivre</h1>
+                <h1> LivreCollection</h1>
             </div>
 
             <nav class="navbar navbar-expand-lg" style="background-color: #70DDFF;">
@@ -54,11 +54,11 @@
                         {% else %}
 
                             <span class="navbar-text">
-                                <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion - </a>
+                                <a class="nav-link span-button" href="{{ path('app_logout') }}">Déconnexion</a>
                             </span>
 
                             <span class="navbar-text">
-                                <a class="nav-link" href="{{ path('app_profil') }}">- Bonjour {{ app.user.pseudo }}</a>
+                                <a class="nav-link span-button" href="{{ path('app_profil') }}">Bonjour {{ app.user.pseudo }}</a>
                             </span>
 
                         {% endif %}
@@ -77,9 +77,9 @@
 
             <div>
                 <ul class="pied-page">
-                    <li><a href="{{ path('app_admin_main_liste') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_admin_main_mentions') }}">Mentions légales</a></li>
-                    <li><a href="{{ path('app_admin_main_travaux') }}">Contact</a></li>
+                    <li><a href="{{ path('app_main_liste') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_main_mentions') }}">Mentions légales</a></li>
+                    <li><a href="{{ path('app_main_travaux') }}">Contact</a></li>
                 </ul>
 
                 <p class="text-center">Copyright @2023 | Create by Meya</p>

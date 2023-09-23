@@ -43,17 +43,17 @@ class Livre
     #[ORM\ManyToOne(inversedBy: 'livres')]
     private ?Edition $edition = null;
 
-    #[ORM\ManyToMany(targetEntity: Bibliotheque::class, inversedBy: 'livres')]
-    private Collection $bibliotheques;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $couverture = null;
+
+    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: LivreBibliotheque::class)]
+    private Collection $livreBibliotheques;
 
     public function __construct()
     {
         $this->auteurs = new ArrayCollection();
         $this->genres = new ArrayCollection();
-        $this->bibliotheques = new ArrayCollection();
+        $this->livreBibliotheques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,33 +202,7 @@ class Livre
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bibliotheque>
-     */
-    public function getBibliotheques(): Collection
-    {
-        return $this->bibliotheques;
-    }
 
-    public function addBibliotheque(Bibliotheque $bibliotheque): static
-    {
-        if (!$this->bibliotheques->contains($bibliotheque)) {
-            $this->bibliotheques->add($bibliotheque);
-        }
-
-        return $this;
-    }
-
-    public function removeBibliotheque(Bibliotheque $bibliotheque): static
-    {
-
-        if ($this->bibliotheques->contains($bibliotheque)) {
-            $this->bibliotheques->removeElement($bibliotheque);
-            $bibliotheque->removeLivre($this);
-        }
-
-        return $this;
-    }
     public function getnomComplet(){
         return $this->cycle.' '.$this->tome.' '.$this->titre;
     }
@@ -247,5 +221,35 @@ class Livre
 
     public function getTitreComplet(){
         return $this->cycle.' '.$this->tome.' '.$this->titre;
+    }
+
+    /**
+     * @return Collection<int, LivreBibliotheque>
+     */
+    public function getLivreBibliotheques(): Collection
+    {
+        return $this->livreBibliotheques;
+    }
+
+    public function addLivreBibliotheque(LivreBibliotheque $livreBibliotheque): static
+    {
+        if (!$this->livreBibliotheques->contains($livreBibliotheque)) {
+            $this->livreBibliotheques->add($livreBibliotheque);
+            $livreBibliotheque->setLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLivreBibliotheque(LivreBibliotheque $livreBibliotheque): static
+    {
+        if ($this->livreBibliotheques->removeElement($livreBibliotheque)) {
+            // set the owning side to null (unless already changed)
+            if ($livreBibliotheque->getLivre() === $this) {
+                $livreBibliotheque->setLivre(null);
+            }
+        }
+
+        return $this;
     }
 }

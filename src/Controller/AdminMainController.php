@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Livre;
+use App\Form\AddLivreToBibliothequeType;
 use App\Form\LivreType;
 use App\Repository\LivreRepository;
 use App\Service\UploadService;
@@ -18,15 +19,22 @@ class AdminMainController extends AbstractController
     #[Route('/', name: '_liste')]
     public function lister(LivreRepository $livreRepository): Response
     {
+        $user = $this->getUser();
+        //récupérer les bibliothèques associées à cet utilisateur
+        if ($user) {
+            $bibliotheques = $user->getBibliotheques();
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
         $livres = $livreRepository->findBy([],['cycle' => 'ASC']);
 
         return $this->render('admin/main/main_admin.html.twig', [
             'livres' => $livres,
+            'bibliotheques' => $bibliotheques,
         ]);
 
     }
 
-    //Attention à l'import du request : HttpFoundation
     #[Route('/ajouter', name: '_ajouter')]
     #[Route('/modifier/{id}', name: '_modifier')]
     public function editer(Request $request, 
@@ -83,33 +91,6 @@ class AdminMainController extends AbstractController
         ]);
     }
 
-    #[Route('/meslivres', name: '_livres')]
-    public function mesLivres(LivreRepository $livreRepository): Response
-    {
-        $livres = $livreRepository->findAll();
-
-        return $this->render('admin/main/mes_livres_admin.html.twig', [
-            'livres' => $livres,
-        ]);
-    }
-
-    #[Route('/travaux', name: '_travaux')]
-    public function travaux(): Response
-    {
-        return $this->render('admin/main/en_travaux_admin.html.twig', [
-            'travaux' => 'MainController',
-        ]);
-    }
-
-    #[Route('/mentions', name: '_mentions')]
-    public function mentionsLegales(): Response
-    {
-        return $this->render('admin/main/mentions_legales_admin.html.twig', [
-            'mentions' => 'AdminMainController',
-        ]);
-    }
-
-
     #[Route('/rechercher', name: '_rechercher')]
     public function rechercher(Request $request, LivreRepository $livreRepository): Response
     {
@@ -119,6 +100,33 @@ class AdminMainController extends AbstractController
 
         return $this->render('admin/main/main_admin.html.twig', [
             'livres' => $livres,
+        ]);
+    }
+
+    #[Route('/admin/livre/ajouter-a-bibliotheque/{id}', name: '_ajouter_a_bibliotheque')]
+    public function ajouterALaBibliotheque(Request $request,
+                                           EntityManagerInterface $entityManager,
+                                           Livre $livre): Response
+    {
+        $form = $this->createForm(AddLivreToBibliothequeType::class, $livre);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $bibliotheque = $form->get('bibliotheque')->getData();
+
+            // Ajoutez le livre à la bibliothèque
+            $bibliotheque->addLivre($livre);
+            $entityManager->persist($bibliotheque); //sauvegarde le bien
+            $entityManager->flush(); //enregistrer en base
+
+            //$this->getDoctrine()->getManager()->flush();
+
+            // Redirigez ou renvoyez une réponse JSON en fonction de vos besoins
+        }
+
+        return $this->render('admin/main/ajouter_a_bibliotheque.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

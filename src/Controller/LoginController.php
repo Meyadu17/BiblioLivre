@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bibliotheque;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,8 @@ class LoginController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $bibliotheque = new Bibliotheque();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -38,6 +41,12 @@ class LoginController extends AbstractController
                 )
             );
             //#endregion encodage du mot de passse
+
+            //Création d'une bibliothèque vide pour le user
+            $bibliotheque->setNom('Non classés');
+            $bibliotheque->setModifiable(false);
+            $bibliotheque->setUser($user);
+            $entityManager->persist($bibliotheque);
 
             $entityManager->persist($user);
             $entityManager->flush();

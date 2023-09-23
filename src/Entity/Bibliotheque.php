@@ -18,15 +18,18 @@ class Bibliotheque
     #[ORM\Column(length: 100)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'bibliotheques')]
-    private Collection $livres;
-
     #[ORM\ManyToOne(inversedBy: 'bibliotheques')]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'bibliotheque', targetEntity: LivreBibliotheque::class, cascade: ["persist"])]
+    private Collection $livreBibliotheques;
+
+    #[ORM\Column]
+    private ?bool $modifiable = true;
+
     public function __construct()
     {
-        $this->livres = new ArrayCollection();
+        $this->livreBibliotheques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,33 +49,6 @@ class Bibliotheque
         return $this;
     }
 
-    /**
-     * @return Collection<int, Livre>
-     */
-    public function getLivres(): Collection
-    {
-        return $this->livres;
-    }
-
-    public function addLivre(Livre $livre): static
-    {
-        if (!$this->livres->contains($livre)) {
-            $this->livres->add($livre);
-            $livre->addBibliotheque($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLivre(Livre $livre): static
-    {
-        if ($this->livres->removeElement($livre)){
-        $livre->removeBibliotheque($this);
-    }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -81,6 +57,48 @@ class Bibliotheque
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LivreBibliotheque>
+     */
+    public function getLivreBibliotheques(): Collection
+    {
+        return $this->livreBibliotheques;
+    }
+
+    public function addLivreBibliotheque(LivreBibliotheque $livreBibliotheque): static
+    {
+        if (!$this->livreBibliotheques->contains($livreBibliotheque)) {
+            $this->livreBibliotheques->add($livreBibliotheque);
+            $livreBibliotheque->setBibliotheque($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLivreBibliotheque(LivreBibliotheque $livreBibliotheque): static
+    {
+        if ($this->livreBibliotheques->removeElement($livreBibliotheque)) {
+            // set the owning side to null (unless already changed)
+            if ($livreBibliotheque->getBibliotheque() === $this) {
+                $livreBibliotheque->setBibliotheque(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isModifiable(): ?bool
+    {
+        return $this->modifiable;
+    }
+
+    public function setModifiable(bool $modifiable): static
+    {
+        $this->modifiable = $modifiable;
 
         return $this;
     }

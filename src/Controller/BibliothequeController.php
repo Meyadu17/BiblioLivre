@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Bibliotheque;
+use App\Entity\LivreBibliotheque;
 use App\Form\BibliothequeType;
 use App\Repository\BibliothequeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,20 +16,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class BibliothequeController extends AbstractController
 {
     #[Route('/liste', name: '_liste')]
-    public function index(BibliothequeRepository $bibliothequeRepository): Response
+    public function index(): Response
     {
-        //recupération de l'id du user connecté
+        //recupération de l'id de l'utilisateur connecté
         $user = $this->getUser();
         //récupérer les bibliothèques associées à cet utilisateur
-        if ($user) {
-            $bibliotheques = $user->getBibliotheques();
-        } else {
+        if (!$user) {
             return $this->redirectToRoute('app_login');
         }
 
+        // Récupérer les bibliothèques associées à cet utilisateur
+        $bibliotheques = $user->getBibliotheques();
+
+        // Créer un tableau pour stocker les livres associés à chaque bibliothèque
+        $livresParBibliotheque = [];
+
+        // Itérer sur les bibliothèques de l'utilisateur
+        foreach ($bibliotheques as $bibliotheque) {
+            // Récupérer les livres associés à cette bibliothèque
+            $livres = $bibliotheque->getLivreBibliotheques()->map(function ($livreBibliotheque) {
+                return $livreBibliotheque->getLivre();
+            });
+
+            // Stocker les livres dans le tableau
+            $livresParBibliotheque[$bibliotheque->getId()] = $livres;
+        }
 
         return $this->render('bibliotheque/index.html.twig', [
             'bibliotheques' => $bibliotheques,
+            'livresParBibliotheque' => $livresParBibliotheque,
         ]);
     }
 
@@ -41,14 +57,17 @@ class BibliothequeController extends AbstractController
     {
 
         if ($id == null) {
-            //Si id null, c'est que l'on créer le bien
+            //Si id null, c'est que l'on créer la bibliothèque
             $bibliotheque = new Bibliotheque();
+            $livreBibliotheque = new LivreBibliotheque();
+            $bibliotheque->addLivreBibliotheque($livreBibliotheque);
+            $bibliotheque->setUser($this->getUser());
+            $bibliotheque->setModifiable(true);
         } else {
             //S'il existe, on est dans le cas de la modification
             $bibliotheque = $bibliothequeRepository->find($id);
 
-
-            //je controlle que le bien appartient au b bon gestonnaire
+            //je contrôle que la bibliothèque appartient au bon user
             if ($bibliotheque->getUser() !== $this->getUser()) {
                 $this->addFlash(
                     'danger',
@@ -67,8 +86,6 @@ class BibliothequeController extends AbstractController
         //si le formulaire est soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //set le user de la personne connecté
-            $bibliotheque->setUser($this->getUser());
             //traitement des données
             $entityManager->persist($bibliotheque); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
@@ -76,7 +93,7 @@ class BibliothequeController extends AbstractController
             //message de succés et redirection sur la liste des livres
             $this->addFlash(
                 'success',
-                'la bibliothèque à bien été édité !'
+                'la bibliothèque à bien été ' . ($id == null ? 'ajouté' : 'modifié') . ' !'
             );
 
             return $this->redirectToRoute('app_bibliotheque_liste');
@@ -84,14 +101,6 @@ class BibliothequeController extends AbstractController
 
         return $this->render('bibliotheque/editer_bibliotheque.html.twig', [
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: '_voir', requirements: ['id' => '\d+'])]
-    public function voir(Bibliotheque $bibliotheque): Response
-    {
-
-        return $this->render('bibliotheque/voir_bibliotheque.html.twig', [
             'bibliotheque' => $bibliotheque,
         ]);
     }
@@ -103,14 +112,13 @@ class BibliothequeController extends AbstractController
     {
 
         $bibliotheque = $bibliothequeRepository->find($id);
-
-
         $entityManager->remove($bibliotheque);
         $entityManager->flush();
 
         $this->addFlash(
             'success',
-            'la bibliothèque a bien été suprimée.');
+            'la bibliothèque a bien été suprimée.'
+        );
 
         return $this->redirectToRoute('app_bibliotheque_liste');
     }

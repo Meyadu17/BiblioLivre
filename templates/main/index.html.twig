@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BiblioLivre{% endblock %}
+{% block title %}Livres{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -38,23 +38,55 @@
                             </small>
                         </p>
                     </div>
-                    
+
                     <div class="card-body">
-                        <a class="btn btn-outline-light" href="{{ path('app_main_travaux', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="ajouter fa-solid fa-circle-plus"></i> Ajouter à la collection</a>
-                    </div>
+                        <a class="btn btn-outline-light" data-toggle="modal" data-target="#ajouterLivreModal{{ livre.id }}" href="#" class="card-link" style="color: #3D3D3D;">
+                            <i class="ajouter fa-solid fa-circle-plus"></i> Ajouter à la collection
+                        </a>
+                        {% include 'modal/ajouter_livre.html.twig' %}
+
                     <div class="card-body">
-                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;"><i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre</a>
+                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="card-link" style="color: #3D3D3D;">
+                            <i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre
+                        </a>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <a class="btn btn-outline-light card-link" href="{{ path('app_admin_main_modifier', {'id' : livre.id}) }}" style="color: #3D3D3D;"><i class="ajouter fa-solid fa-pen"></i> Modifier le livre</a>
+                        <a class="btn btn-outline-light card-link" href="{{ path('app_admin_main_modifier', {'id' : livre.id}) }}" style="color: #3D3D3D;">
+                            <i class="ajouter fa-solid fa-pen"></i> Modifier le livre
+                        </a>
                         {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-
     {% endfor %}
-
-
-
 </div>
+
+    <!-- Inclure jQuery (si ce n'est pas déjà fait) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Inclure Bootstrap JS (si ce n'est pas déjà fait) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript pour ouvrir le modal -->
+    <script>
+        $(document).ready(function () {
+            // Gérer le clic sur le lien pour ouvrir le modal
+            $('a[data-toggle="modal"]').click(function () {
+                var targetModal = $(this).data('target');
+                $(targetModal).modal('show');
+            });
+
+            // Gérer le clic sur le bouton "Fermer" de la boîte de dialogue
+            $('.modal .btn-close').click(function () {
+                var parentModal = $(this).closest('.modal');
+                parentModal.modal('hide');
+            });
+
+            $('.modal .btn-secondary').click(function () {
+                var parentModal = $(this).closest('.modal');
+                parentModal.modal('hide');
+            });
+        });
+    </script>
+
 {% endblock %}

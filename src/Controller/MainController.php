@@ -14,10 +14,18 @@ class MainController extends AbstractController{
     #[Route('/', name: '_liste')]
     public function lister(LivreRepository $livreRepository): Response
     {
+        $user = $this->getUser();
+        //récupérer les bibliothèques associées à cet utilisateur
+        if ($user) {
+            $bibliotheques = $user->getBibliotheques();
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
         $livres = $livreRepository->findBy([],['cycle' => 'ASC']);
 
         return $this->render('main/index.html.twig', [
             'livres' => $livres,
+            'bibliotheques' => $bibliotheques,
         ]);
     }
     #[Route('/{id}', name: '_voir', requirements: ['id' => '\d+'])]

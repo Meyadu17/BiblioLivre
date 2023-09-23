@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BiblioLivre{% endblock %}
+{% block title %}Editer Bibliothèque{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -21,12 +21,18 @@
                             {{ form_errors(form.nom) }}
                         </div>
 
-                        <div class="form-check form-check-inline">
-                            {{ form_label(form.livres, 'Livre(s)* :') }}
-                            <div class="three-column-list">
-                            {{ form_widget(form.livres) }}
-                            {{ form_errors(form.livres) }}
-                            </div>
+                    <h4 class="mt-5">Ajouter des livres à la bibliothèque</h4>
+
+                    <button type="button" class="add_item_link btn btn-sm btn-primary my-2 w-25" data-collection-holder-class="livreBibliotheques">Ajouter un livre</button>
+
+                    <div class="livreBibliotheques row"
+                         data-index="{{ form.livreBibliotheques|length > 0 ? form.livreBibliotheques|last.vars.name + 1 : 0 }}"
+                         data-prototype="{{ form_widget(form.livreBibliotheques.vars.prototype)|e('html_attr') }}">
+                            {% for livre in form.livreBibliotheques %}
+                                <div class="col-4 user my-4">
+                                    {{ form_row(livre) }}
+                                </div>
+                            {% endfor %}
                         </div>
 
                         <div class="col-sm" style="text-align: center">
@@ -38,4 +44,47 @@
         </div>
     </section>
 
+    <script>
+        const addFormToCollection = (e) => {
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+            const item = document.createElement('div');
+            item.classList.add('col-4');
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                );
+            collectionHolder.appendChild(item);
+            collectionHolder.dataset.index++;
+            // add a delete link to the new form
+            addUserFormDeleteLink(item); // Utilisez la fonction addUserFormDeleteLink ici
+        };
+
+        const addUserFormDeleteLink = (item) => { // Utilisez le nom addUserFormDeleteLink ici
+            const removeFormButton = document.createElement('button');
+            removeFormButton.classList.add('btn', 'btn-danger', 'btn-sm');
+            removeFormButton.innerText = 'Supprimer le livre';
+            item.append(removeFormButton);
+            removeFormButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                // remove the div for the user form
+                item.remove();
+            });
+        }
+
+        document
+            .querySelectorAll('.add_item_link')
+            .forEach(btn => {
+                btn.addEventListener("click", addFormToCollection)
+            });
+
+        document
+            .querySelectorAll('div.livreBibliotheques div.user')
+            .forEach((user) => {
+                addUserFormDeleteLink(user)
+            });
+
+    </script>
 {% endblock %}
