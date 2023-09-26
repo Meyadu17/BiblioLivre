@@ -17,7 +17,7 @@
     </section>
 
     <section class="admin_body_container">
-        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+        <div class="card mb-3" style="width: 80%; padding: 8px;">
             <div class="row g-0">
                 <h2 class="mb-4">Liste des mes bibliothèques</h2>
                 <div class="card-body">
@@ -31,9 +31,9 @@
                                         <a href="{{ path('app_bibliotheque_supprimer', {'id' : bibliotheque.id}) }}"><i class="delete fa-solid fa-trash" style="padding: 0 20px"></i></a>
                                     </button>
                                 </h2>
-                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                                <div id="{{ 'collapse_' ~ bibliotheque.id }}" class="accordion-collapse collapse">
                                     <div class="accordion-body">
-                                        <table class="table table-striped" title="Biblio 1">
+                                        <table class="table table-striped" title="Bibliothèque {{ bibliotheque.nom }}">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Cycle</th>
@@ -43,33 +43,34 @@
                                                 <th scope="col">Action</th>
                                             </tr>
                                             </thead>
-                                            <tbody >
-                                            {% for livre in bibliotheque.livres %}
+                                            <tbody>
+                                            {% for livreUser in bibliotheque.livreUsers %}
                                                 <tr>
-                                                    <td>{{livre.cycle}}</td>
-                                                    <td>{{livre.tome}} - {{livre.titre}}</td>
+                                                    <td>{{ livreUser.livre.cycle }}</td>
+                                                    <td>{{ livreUser.livre.titre }}</td>
                                                     <td>
-                                                        {% for auteur in livre.auteurs %}
-                                                            {{auteur.prenomnom}}
-                                                            {% if not loop.last%}
+                                                        {% for auteur in livreUser.livre.auteurs %}
+                                                            {{ auteur.prenomnom }}
+                                                            {% if not loop.last %}
                                                                 -
                                                             {% endif %}
                                                         {% endfor %}
                                                     </td>
                                                     <td>
-                                                        {% for genre in livre.genres %}
-                                                            {{genre.libelle}}
-                                                            {% if not loop.last%}
+                                                        {% for genre in livreUser.livre.genres %}
+                                                            {{ genre.libelle }}
+                                                            {% if not loop.last %}
                                                                 -
                                                             {% endif %}
                                                         {% endfor %}
                                                     </td>
-                                                    <th>
-                                                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livre.id}) }}" class="detail card-link" style="color: #3D3D3D;"><i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre</a>
-                                                    </th>
+                                                    <td>
+                                                        <a class="btn btn-outline-light" href="{{ path('app_main_voir', {'id' : livreUser.livre.id}) }}" class="detail card-link" style="color: #3D3D3D;">
+                                                            <i class="detail fa-solid fa-magnifying-glass"></i> Détail du livre
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -77,7 +78,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                 </div>
             </div>
         </div>

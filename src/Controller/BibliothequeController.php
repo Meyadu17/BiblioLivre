@@ -7,6 +7,7 @@ use App\Form\BibliothequeType;
 use App\Repository\BibliothequeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,9 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class BibliothequeController extends AbstractController
 {
     #[Route('/liste', name: '_liste')]
-    public function index(BibliothequeRepository $bibliothequeRepository): Response
+    public function index(BibliothequeRepository $bibliothequeRepository, Security $security): Response
     {
-        $bibliotheques = $bibliothequeRepository->findAll();
+        // Récupérer l'utilisateur actuel
+        $user = $security->getUser();
+
+        if (!$user) {
+            // Gérer le cas où l'utilisateur n'est pas connecté
+            return $this->redirectToRoute('app_login');
+        }
+        $bibliotheques = $bibliothequeRepository->findBy(['user' => $user]);
 
         return $this->render('bibliotheque/index.html.twig', [
             'bibliotheques' => $bibliotheques,
