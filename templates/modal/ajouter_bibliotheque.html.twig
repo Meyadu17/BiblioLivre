@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="ajouterBibliothequeModal" tabindex="-1" aria-labelledby="ajouterBibliothequeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ajouterBibliothequeModalLabel">Nouvelle bibliothèque</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                {{ form_start(form, {'attr': {'class': 'form-floating'}}) }}
+                    <div class="form-floating mb-3">
+                        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_label(form.nom, 'Nom* :', {'attr': {'for': 'floatingInput'}}) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        {{ form_label(form.livreUsers, 'Livre(s) :') }}
+                        <div class="three-column-list">
+                            {{ form_widget(form.livreUsers) }}
+                            {{ form_errors(form.livreUsers) }}
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-light card-link" style="color: #3D3D3D; border-color: #3D3D3D" type="submit"><i class="ajouter fa-solid fa-circle-plus"></i> Ajouter</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

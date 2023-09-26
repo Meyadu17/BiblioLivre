@@ -16,37 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class BibliothequeController extends AbstractController
 {
     #[Route('/liste', name: '_liste')]
-    public function index(BibliothequeRepository $bibliothequeRepository, Security $security): Response
+    public function index(BibliothequeRepository $bibliothequeRepository,
+                          Security $security,
+                          Request $request,
+                          EntityManagerInterface $entityManager,
+                          int                    $id = null): Response
     {
-        // Récupérer l'utilisateur actuel
-        $user = $security->getUser();
-
-        if (!$user) {
-            // Gérer le cas où l'utilisateur n'est pas connecté
-            return $this->redirectToRoute('app_login');
-        }
-        $bibliotheques = $bibliothequeRepository->findBy(['user' => $user]);
-
-        return $this->render('bibliotheque/index.html.twig', [
-            'bibliotheques' => $bibliotheques,
-        ]);
-    }
-
-    #[Route('/ajouter', name: '_ajouter')]
-    #[Route('/modifier/{id}', name: '_modifier')]
-    public function editer(Request                $request,
-                           EntityManagerInterface $entityManager,
-                           BibliothequeRepository $bibliothequeRepository,
-                           int                    $id = null): Response
-    {
-
+        //#region modal
         if ($id == null) {
             //Si id null, c'est que l'on créer la bibliothèque
             $bibliotheque = new Bibliotheque();
-            //$livreBibliotheque = new LivreBibliotheque();
-            //$bibliotheque->addLivreBibliotheque($livreBibliotheque);
-            $bibliotheque->setUser($this->getUser());
-            $bibliotheque->setModifiable(true);
         } else {
             //S'il existe, on est dans le cas de la modification
             $bibliotheque = $bibliothequeRepository->find($id);
@@ -70,6 +49,9 @@ class BibliothequeController extends AbstractController
         //si le formulaire est soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $bibliotheque->setUser($this->getUser());
+            $bibliotheque->setModifiable(true);
+
             //traitement des données
             $entityManager->persist($bibliotheque); //sauvegarde le bien
             $entityManager->flush(); //enregistrer en base
@@ -82,10 +64,21 @@ class BibliothequeController extends AbstractController
 
             return $this->redirectToRoute('app_bibliotheque_liste');
         }
+        //#endregion modal
 
-        return $this->render('bibliotheque/editer_bibliotheque.html.twig', [
+        //#region afficher les bibliothèques
+        // Récupérer l'utilisateur actuel
+        $user = $security->getUser();
+        $bibliotheque->setUser($this->getUser());
+        if (!$user) {
+            // Gérer le cas où l'utilisateur n'est pas connecté
+            return $this->redirectToRoute('app_login');
+        }
+        $bibliotheques = $bibliothequeRepository->findBy(['user' => $user]);
+        //#endregion afficher les bibliothèques
+        return $this->render('bibliotheque/index.html.twig', [
+            'bibliotheques' => $bibliotheques,
             'form' => $form,
-            //'bibliotheque' => $bibliotheque,
         ]);
     }
 
