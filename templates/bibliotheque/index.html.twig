@@ -44,8 +44,7 @@
                                             </tr>
                                             </thead>
                                             <tbody >
-                                            {% for livreBibliotheque in bibliotheque.livreBibliotheques %}
-                                                {% set livre = livreBibliotheque.livre %}
+                                            {% for livre in bibliotheque.livres %}
                                                 <tr>
                                                     <td>{{livre.cycle}}</td>
                                                     <td>{{livre.tome}} - {{livre.titre}}</td>

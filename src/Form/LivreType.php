@@ -44,7 +44,6 @@ class LivreType extends AbstractType
                 'class' => Edition::class,
                 'choice_label' => 'libelle',
             ])
-            ->add('isbn')
             ->add('resume')
             ->add('couverture', FileType::class, [
                 'label' => 'Couverture du livre',

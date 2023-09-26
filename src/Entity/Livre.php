@@ -25,9 +25,6 @@ class Livre
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $isbn = null;
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $resume = null;
 
@@ -46,14 +43,14 @@ class Livre
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $couverture = null;
 
-    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: LivreBibliotheque::class)]
-    private Collection $livreBibliotheques;
+    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: LivreUser::class)]
+    private Collection $livreUsers;
 
     public function __construct()
     {
         $this->auteurs = new ArrayCollection();
         $this->genres = new ArrayCollection();
-        $this->livreBibliotheques = new ArrayCollection();
+        $this->livreUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,18 +90,6 @@ class Livre
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getIsbn(): ?int
-    {
-        return $this->isbn;
-    }
-
-    public function setIsbn(?int $isbn): static
-    {
-        $this->isbn = $isbn;
 
         return $this;
     }
@@ -224,29 +209,29 @@ class Livre
     }
 
     /**
-     * @return Collection<int, LivreBibliotheque>
+     * @return Collection<int, LivreUser>
      */
-    public function getLivreBibliotheques(): Collection
+    public function getLivreUsers(): Collection
     {
-        return $this->livreBibliotheques;
+        return $this->livreUsers;
     }
 
-    public function addLivreBibliotheque(LivreBibliotheque $livreBibliotheque): static
+    public function addLivreUser(LivreUser $livreUser): static
     {
-        if (!$this->livreBibliotheques->contains($livreBibliotheque)) {
-            $this->livreBibliotheques->add($livreBibliotheque);
-            $livreBibliotheque->setLivre($this);
+        if (!$this->livreUsers->contains($livreUser)) {
+            $this->livreUsers->add($livreUser);
+            $livreUser->setLivre($this);
         }
 
         return $this;
     }
 
-    public function removeLivreBibliotheque(LivreBibliotheque $livreBibliotheque): static
+    public function removeLivreUser(LivreUser $livreUser): static
     {
-        if ($this->livreBibliotheques->removeElement($livreBibliotheque)) {
+        if ($this->livreUsers->removeElement($livreUser)) {
             // set the owning side to null (unless already changed)
-            if ($livreBibliotheque->getLivre() === $this) {
-                $livreBibliotheque->setLivre(null);
+            if ($livreUser->getLivre() === $this) {
+                $livreUser->setLivre(null);
             }
         }
 

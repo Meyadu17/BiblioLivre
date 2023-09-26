@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Bibliotheque;
+use App\Entity\Livre;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -16,11 +18,18 @@ class BibliothequeType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('livreBibliotheques', CollectionType::class, [
-                'entry_type' => LivreBibliothequeType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false
+//            ->add('livreBibliotheques', CollectionType::class, [
+//                'entry_type' => LivreBibliothequeType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'by_reference' => false
+//            ])
+            ->add('livres', EntityType::class, [
+                'class' => Livre::class,
+                'choice_label' => 'nomComplet',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
             ])
             ->add('modifiable', HiddenType::class, [
                 'attr' => ['class' => 'hidden']

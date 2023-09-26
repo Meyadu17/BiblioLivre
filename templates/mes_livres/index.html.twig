@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes livres{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="admin_body_container">
+        <div class="card mb-3" style="width: 80% ; padding: 8px;">
+            <div class="row g-0">
+                <h2 class="mb-4">Mes livres</h2>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Cycle</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Bibliothèque</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        {% for livreUser in livreUsers %}
+                            <tr>
+                                <td>{{livreUser.livre.cycle}}</td>
+                                <td>{{livreUser.livre.tome}} - {{livreUser.livre.titre}}</td>
+                                <td>
+                                    {% for auteur in livreUser.livre.auteurs %}
+                                        {{auteur.prenomnom}}
+                                        {% if not loop.last%}
+                                            -
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for genre in livreUser.livre.genres %}
+                                        {{genre.libelle}}
+                                        {% if not loop.last%}
+                                            -
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>{{livreUser.bibliotheque.nom}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

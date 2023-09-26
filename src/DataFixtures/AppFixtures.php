@@ -85,7 +85,6 @@ class AppFixtures extends Fixture
         $livre->setTome("1");
         $livre->setLangue($langue);
         $livre->setEdition($edition);
-        $livre->setIsbn($faker->isbn10);
         $livre->setResume($faker->paragraph);
         $livre->addAuteur($auteur);
         $livre->addGenre($genre);
@@ -97,7 +96,6 @@ class AppFixtures extends Fixture
         $livre->setTitre("A l'ecole des sorciers");
         $livre->setLangue($langue);
         $livre->setEdition($edition);
-        $livre->setIsbn($faker->isbn10);
         $livre->setResume($faker->paragraph);
         $livre->addAuteur($auteur2);
         $livre->addGenre($genre);
